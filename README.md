@@ -19,7 +19,7 @@ Requirements:
 Bonus Points:
 1. Add animation where you see fit
 2. Use font icons for social sharing images and soccer ball 
-3. Add some unit tests 
+3. Add some unit tests to for you ajax requestes
 
 #### Submission
 
