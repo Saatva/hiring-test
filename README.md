@@ -1,4 +1,4 @@
-Objective: 
+#### Objective: 
 Create a single page application using the screen shot provided in this file as your guide. Please use the data in the "news.json" file to populate the articles in the application. Feel free to use whichever framework you feel is best.
 
 Requirements: 
@@ -12,6 +12,8 @@ Requirements:
    - long description 
 
 3. The application you create should be responsive though we have provided the desktop image for the desktop experience. You are responsible for deciding how the application will scale to a mobile experince. This is your opportunity to be creative.
+
+4. Use 'Questrial' for all headers and 'Pragati Narrow' for body copy. These can be found on google fonts website.
 
 
 Bonus Points:
