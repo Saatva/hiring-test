@@ -1,0 +1,12 @@
+{
+    "name" : "Saatva Inventory Saver",
+    "description" : "Consolidated service for saving inventory",
+    "autoload": {
+        "psr-4" : { 
+                    "Saatva\\Inventorysaver\\" : "src/"
+                  }
+    },
+    "require": {
+        "monolog/monolog": "1.7.*"
+    }    
+}
