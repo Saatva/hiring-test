@@ -11,13 +11,27 @@ namespace Saatva\Inventorysaver;
 class Mattress
 {
     private $name;
+    private $size;
+    private $region;
 
-    public function __construct($name) {
+    public function __construct($name, $size, $region) {
         $this->name = $name;
+        $this->size = $size;
+        $this->region = $region;
     }
 
     public function getName() {
         return $this->name;
+    }
+
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    public function getRegion()
+    {
+        return $this->region;
     }
 
  }

@@ -24,6 +24,19 @@ class Inventory
     public function getMattresses() {
         return $this->mattresses;
     }
+
+    public function getMattressesBySize($size)
+    {
+        $results = [];
+
+        foreach($this->mattresses as $mattress) {
+            if ($mattress->getSize() === $size) {
+                $results[] = $mattress;
+            }
+        }
+
+        return $results;
+    }
     
     //check specific slots
     public function checkSlot($slotNum) {

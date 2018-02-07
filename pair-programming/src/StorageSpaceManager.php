@@ -27,6 +27,30 @@ class StorageSpaceManager
         return $this->spaces;
     }
 
+    public function getSpacesForRegion($region)
+    {
+        $results = [];
+        foreach($this->spaces as $space) {
+            if ($space->getRegion() === $region) {
+                $results[] = $space;
+            }
+        }
+
+        return $results;
+    }
+
+    public function getMattressesForRegion($region, $size)
+    {
+        $results = [];
+        foreach ($this->spaces as $space) {
+            if ($space->getRegion() === $region) {
+                $results[] = $space->getInventory()->getMattressesBySize($size);
+            }
+        }
+
+        return $results;
+    }
+
     /**
      *
      * @param type $spaceName

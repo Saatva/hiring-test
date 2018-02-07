@@ -13,11 +13,13 @@ class StorageSpace implements Storable
     private $capacity;
     private $name;
     private $inventory;
+    private $region;
 
-    public function __construct($name, $capacity) {
+    public function __construct($name, $capacity, $region) {
         $this->capacity = $capacity;
         $this->name = $name;
         $this->inventory = new Inventory($capacity);
+        $this->region = $region;
     }
 
     public function checkAvailability() {
@@ -37,6 +39,10 @@ class StorageSpace implements Storable
         return $this->name;
     }
 
+    public function getRegion() {
+        return $this->region;
+    }
+
     //attempt to store a mattress in this space
     public function store(Mattress $mattress) {
 
@@ -49,6 +55,6 @@ class StorageSpace implements Storable
     }
 
     public function __toString() {
-        return "Name: " . $this->name . " Capacity: " . $this->capacity . "\nInventory:\n" . $this->inventory;
+        return "Name: " . $this->name . " Capacity: " . $this->capacity . "\nInventory:\n" . $this->inventory . " \nRegion:\n" . $this->region;
     }
 }
