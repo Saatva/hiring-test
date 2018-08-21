@@ -1,5 +1,5 @@
 #### Objective: 
-Create a single page application using the screen shot provided in this file as your guide. Please use the data provided by this url (https://s3-us-west-2.amazonaws.com/saatva-hiring/news.json) to populate the articles in the application. Feel free to use whichever framework you feel is best and add your own flare to the project the design is just a guideline.
+Create a single page application using the screen shot provided in this file as your guide. Please use the data provided by this url (https://s3-us-west-2.amazonaws.com/saatva-hiring/news.json) to populate the articles in the application. Feel free to use whichever framework you feel is best and add your own flare to the project, the design is just a guideline.
 
 Requirements: 
 1. Left section should be the full list of articles
