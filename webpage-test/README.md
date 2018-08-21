@@ -20,7 +20,7 @@ Bonus Points:
 1. Use a css preprocessor of you liking sass or less
 2. Add animation where you see fit
 3. Use font icons for social sharing images
-4. Add some unit tests for you ajax requestes
+4. Add some unit tests for your ajax requestes
 
 #### Submission
 
