@@ -1,0 +1,67 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "standard",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true,
+        "amd": true,
+        "node": true,
+        "jest": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "jsx-a11y"
+    ],
+    "rules": {
+        "react/no-unescaped-entities": [
+            "error", {
+                "forbid": [
+                    ">",
+                    "}"
+                ]
+            }
+        ],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "quotes": [
+            "error",
+            "single",{
+                "allowTemplateLiterals": true
+            }
+        ],
+        "indent":[
+            "error",
+            4, {
+                "SwitchCase": 1
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": "should|expect"
+            }
+        ],
+        "react-hooks/rules-of-hooks": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

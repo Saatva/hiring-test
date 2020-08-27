@@ -1,0 +1,13 @@
+{
+    "mattresses": {
+        "classic": {
+            "description": "<p>Luxury Hybrid Innerspring</p>"
+        },
+        "loom": {
+            "description": "<p>Ultra-Premium Memory Foam</p>"
+        },
+        "zen": {
+            "description": "<p>100% Pure Talalay Latex</p>"
+        }
+    }
+}
