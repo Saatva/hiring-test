@@ -1,19 +1,18 @@
 ## Mattress Shop Page
-Create a single page application using the screen shot provided (mock.png) as your guide. Please use the data provided in mattresses.json to populate the mattress data in the application.
-
-Feel free to use whichever framework you feel is best.
+Create a single page React application using the screen shot provided (mock.png) as your guide. Please use the data provided in mattresses.json to populate the mattress data in the application.
 
 ### Requirements: 
-1. The design should match the mock as best as possible.
+1. Application uses React framework.
+2. The design should match the mock as best as possible.
    * You can use a design system (ex. Bootstrap) if preferred.
    * Use a cart icon of your choice.
-2. The user should have the ability to toggle between mattresses.
-3. As the mattress selection changes:
+3. The user should have the ability to toggle between mattresses.
+4. As the mattress selection changes:
    * the selected mattress name and price should be reflected below the mattress toggle.
    * the selected mattress image should be reflected to the left of the configuration area (images files can be found in /images)
-4. The "Add to Cart" button should increment the cart item count (in the top right of the view) 
-5. The application you create should be responsive though we have only provided the design for the desktop experience. You are responsible for deciding how the application will scale to a mobile experience. This is your opportunity to be creative.
-6. Use fonts 'Source Serif Pro' for the "Choose Your Mattress" header and 'Questrial' for body copy. These can be found on google fonts website.
+5. The "Add to Cart" button should increment the cart item count (in the top right of the view) 
+6. The application you create should be responsive though we have only provided the design for the desktop experience. You are responsible for deciding how the application will scale to a mobile experience. This is your opportunity to be creative.
+7. Use fonts 'Source Serif Pro' for the "Choose Your Mattress" header and 'Questrial' for body copy. These can be found on google fonts website.
 
 
 ### Bonus Points:
