@@ -9,13 +9,13 @@
         "loom": {
             "name": "Loom & Leaf",
             "price": 1299,
-            "reviewRating": 4.7,
+            "reviewRating": 4.0,
             "imageFileName": "loom-carousel.jpg"
         },
         "zen": {
             "name": "Zenhaven",
             "price": 1599,
-            "reviewRating": 4.8,
+            "reviewRating": 4.5,
             "imageFileName": "zen-carousel.jpg"
         }
     }
