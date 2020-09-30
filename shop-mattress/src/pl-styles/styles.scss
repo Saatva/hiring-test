@@ -1,0 +1,18 @@
+//-------------------------------------------
+// Import of all styles
+// ------------------------------------------
+
+@import 'settings.styles';
+@import 'tools.styles';
+@import 'core';
+@import 'utils.styles';
+
+
+// Styles for HTML examples only
+.example-box {
+    padding: spacer(base);
+    text-align: center;
+    background-color: $link-color;
+    border: solid 1px darken($link-color, 20%);
+    color: #fff;
+}

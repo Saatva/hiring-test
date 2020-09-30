@@ -1,0 +1,265 @@
+/* ==========================================================================
+   #Visibility
+   ========================================================================== */
+
+/// ### Hide Elements
+///
+/// The `u-hidden` utility hides an elment. However, it has a few different options depending on what you append to the class name. 
+///
+/// #### How hidden is it?
+/// You can control whether it's hidden from just the user and NOT screen readers with `u-hiddenVisually`, or you can hide it from BOTH the user and screen readers with `u-hidden`.
+///
+/// #### When is it hidden?
+/// You have the option to define if it's hidden from X-breakpoint and wider (min-width), or X-breakpoint and narrower (max-width).
+///
+/// For min-width, meaning from X breakpoint and up, you will append `--{breakpoint}-up`. If you you need it to apply a max-width, you will use `--{breakpoint}-down`. *The {breakpoint} options follow that of the [breakpoint map](settings-layout.html#variable--breakpoints)
+///
+/// @example html
+/// <div class="u-hidden--md-down">Bennett The Dog is only seen above the 'md' breakpoint</div>
+/// <div class="u-hidden--md-up">Pasha The Dog is only seen below the 'md' breakpoint</div>
+/// @group utils-visibility
+
+
+// Hide visually only (accessible to screen readers and js hooks)
+.u-hiddenVisually {
+  @include hidden-visually();
+}
+
+// hide visually and from all of the things
+.u-hidden {
+  display: none !important;
+}
+
+.u-overflow-hidden { 
+  overflow: hidden;
+}
+
+// TODO: extend all hidden-smwith mixin or function or @each
+@include media-query-down(xs) {
+  .u-hiddenVisually--sm-down {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--sm-down {
+    display: none !important;
+  }
+}
+
+@include media-query-up(sm) {
+  .u-hiddenVisually--sm-up {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--sm-up {
+    display: none !important;
+  }
+}
+
+
+
+@include media-query-down(sm) {
+  .u-hiddenVisually--md-down {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--md-down {
+    display: none !important;
+  }
+}
+
+@include media-query-up(md) {
+  .u-hiddenVisually--md-up {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--md-up {
+    display: none !important;
+  }
+}
+
+@include media-query-down(md) {
+  .u-hiddenVisually--lg-down {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--lg-down {
+    display: none !important;
+  }
+}
+
+@include media-query-up(lg) {
+  .u-hiddenVisually--lg-up {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--lg-up {
+    display: none !important;
+  }
+}
+
+@include media-query-down(lg) {
+  .u-hiddenVisually--xl-down {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--xl-down {
+    display: none !important;
+  }
+}
+
+
+@include media-query-up(xl) {
+  .u-hiddenVisually--xl-up {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--xl-up {
+    display: none !important;
+  }
+}
+
+@include media-query-down(xl) {
+  .u-hiddenVisually--2xl-down {
+    @include hidden-visually();
+  }
+  
+  // hide visually and from all of the things
+  .u-hidden--2xl-down {
+    display: none !important;
+  }
+}
+
+
+/// ### Overflow Elements
+///
+/// The `u-overflow` utility handles the overflow of an element. It too has a few different options depending on what you append to the class name. 
+///
+/// #### Which direction overflows?
+/// You have the option to define the direction of the oveflow with a camelCase addition. By default, it will overflow both x and y, `overflow`, or you overflow just x, overflowX, or just Y, `overflowY`.
+///
+/// #### How does it overflow?
+/// The modifier will be the rule definition (e.g. `u-overflowX--hidden`); you can choose from these options:
+/// - auto
+/// - visible
+/// - hidden
+/// - scroll
+///
+/// @example html
+/// <div class="u-overflowX--hidden" style="width: 210px; height: 2rem;">The rest of this content is hidden ... You can't see it anymore.</div>
+/// @group utils-visibility
+
+$overflowMap: (
+  1: 'overflow',
+  2: 'overflowX',
+  3: 'overflowY'
+);
+
+@each $val in $overflowMap {
+  $namespace: nth($val, 2);
+
+  .u-#{$namespace} {
+    &--auto {
+      overflow: auto;
+    }
+
+    &--visible {
+      overflow: visible;
+    }
+
+    &--hidden {
+      overflow: hidden;
+    }
+
+    &--scroll {
+      overflow: scroll;
+    }
+  }
+}
+
+
+/// ### Scaffolding Assistance
+/// We use the bright colors to indicate scaffolding or elements that need variable style declarations.
+/// 
+/// The basic syntax for scaffold classes is: `.u-scaffold{css property}--{alt variation}`.
+///
+/// #### CSS Properties available
+/// You can add scaffolding to the `outline`, `color` and `bg`. Note that the background options have a lighter shade of the color. 
+///
+/// #### Color (alt) options
+/// The default color is pink, but there are three other possible scaffolding colors to choose from, along with lighter versions:
+/// ```
+/// alt1: blue
+/// alt2: green
+/// alt3: purple
+/// ```/// 
+/// These are set as variables (`$scaffold`, `$scaffold--alt1`, etc) so you can override them for each project if you desire.
+/// @example html
+/// <div class="section u-scaffoldBg">
+///     <div class="container u-scaffoldOutline--alt1">
+///         <div class="row u-scaffoldOutline">
+///             <div class="col col--xs-5 u-scaffoldOutline--alt2">
+///                 <div class="u-margin u-scaffoldOutline--alt3">Content</div>
+///             </div>
+///             <div class="col col--xs-7 u-scaffoldOutline--alt2">
+///                 <div class="u-margin u-scaffoldOutline--alt3">Content</div>
+///             </div>
+///         </div>
+///     </div>
+/// </div>
+/// @group utils-visibility
+
+.u-scaffoldOutline {
+    outline: solid 1px $scaffold;
+}
+
+.u-scaffoldOutline--alt1 {
+    outline: solid 1px $scaffold-alt1;
+}
+
+.u-scaffoldOutline--alt2 {
+    outline: solid 1px $scaffold-alt2;
+}
+
+.u-scaffoldOutline--alt3 {
+    outline: solid 1px $scaffold-alt3;
+}
+
+.u-scaffoldColor {
+    color: $scaffold;
+}
+
+.u-scaffoldColor--alt1 {
+    color: $scaffold-alt1;
+}
+
+.u-scaffoldColor--alt2 {
+    color: $scaffold-alt2;
+}
+
+.u-scaffoldColor--alt3 {
+    color: $scaffold-alt3;
+}
+
+.u-scaffoldBg {
+    background-color: rgba($scaffold, .1);
+}
+
+.u-scaffoldBg--alt1 {
+    background-color: rgba($scaffold-alt1, .1);
+}
+
+.u-scaffoldBg--alt2 {
+    background-color: rgba($scaffold-alt2, .1);
+}
+
+.u-scaffoldBg--alt3 {
+    background-color: rgba($scaffold-alt3, .1);
+}

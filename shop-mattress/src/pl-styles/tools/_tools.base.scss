@@ -1,0 +1,73 @@
+//-------------------------------------------
+// Tools - Base
+// ------------------------------------------
+
+/// # Base Mixins
+/// This is a list of mixins leverged in our base styles that are applied by default.
+/// * [@mixin style-base-body()](#mixin--style-base-body)  
+/// * [@mixin style-base-paragraph()](#mixin--style-base-paragraphy)  
+/// * [@mixin style-base-link()](#mixin--style-base-link)  
+///
+/// @group tools-base
+
+
+/// Sets base body styling for all elements to inherit.
+/// @group tools-base
+/// @example
+/// body { 
+///    @include style-base-body();
+/// }
+@mixin style-base-body() {
+    margin: 0;
+    font-family: $fontFamily-base;
+    font-size: $fontSize-base;
+    font-weight: $fontWeight-base;
+    line-height: $lineHeight-base;
+    color: $body-color;
+    text-align: left;
+    background-color: $body-bg;
+}
+
+/// Sets base typography styling for all `<p>`.
+/// @group tools-base
+/// @example
+/// p { 
+///    @include style-base-paragraph();
+/// }
+@mixin style-base-paragraph() {
+    &:last-child {
+      margin-bottom: 0;
+    }
+}
+
+/// Sets base link styling for all `<a>`.
+/// @group tools-base
+/// @example
+/// a { 
+///    @include style-base-link();
+/// }
+@mixin style-base-link() {
+    color: $link-color;
+
+    &:visited{
+        color: $link-color;
+    }
+    
+    &:hover,
+    &:focus{
+        color: $link-color-hover;
+    }
+}
+
+/// If you set `$use-btn-reset` to false, you can use `btn-reset()` to manually reset `button` primitives on a case-by-case basis.
+/// @group tools-resets
+/// @example
+/// button {
+///    @include btn-reset
+/// }
+@mixin btn-reset() {
+    padding: 0;
+    background: none;
+    appearance: none;
+    border: 0;
+}

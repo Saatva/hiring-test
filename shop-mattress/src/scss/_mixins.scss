@@ -1,0 +1,15 @@
+/* Mediaqueries */
+@mixin from($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+/* Fontfaces */
+@mixin fontface($name) {
+  $path: "./../assets/fonts/" + $name;
+  @font-face {
+    font-family: "#{$name}";    
+    src: url($path + ".ttf") format("truetype");
+  }
+}

@@ -1,0 +1,353 @@
+//-------------------------------------------
+// Tools Functions Styles
+// ------------------------------------------
+
+
+/// Returns the REM value from the [$spacers](settings-layout.html#variable--spacers) map.
+/// @group tools-helpers
+/// @argument {map key} $key [-]
+///   Specifies the name of the spacer from the [$spacers](settings-layout.html#variable--spacers) map.  
+///   It will return an error if the string doesn't exist. 
+/// 
+/// @example
+///   // based on a 16px grid system
+///   .element {
+///      margin-bottom: spacer(2xl);
+///   }
+@function spacer($key) {
+    @if map-has-key($spacers, $key) {
+        @return map-get($spacers, $key);
+    }
+    @warn "Unknown `#{$key}` in $spacers.";
+    @return null;
+}
+
+
+/// Returns the z-index from the [$z-layers](settings-layout.html#variable--z-layers) map.
+/// @group tools-helpers
+/// @argument {string} $key [-]
+///   Specifies the named of the z-index layer from the [$z-layers](settings-layout.html#variable--z-layers) map.  
+///   It will return an error if the string doesn't exist. 
+/// 
+/// @example
+///   .element {
+///      z-index: z('dropdown');
+///   }
+@function z($key) {
+    @if map-has-key($z-layers, $key) {
+        @return map-get($z-layers, $key);
+    }
+    @warn "Unknown `#{$key}` in $z-layers.";
+    @return null;
+}
+
+@mixin print-map($args...) {
+    @debug keywords($args);
+}
+
+/// Hides an element from the user but not from screen readers.
+/// @group tools-helpers
+/// @example
+///   .element {
+///      @include hidden-visually();
+///   }
+@mixin hidden-visually() {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+}
+
+/// Apply ___equal__ top & bottom or left & right spacing to an element.
+/// @param {number} $value - spacing value with unit (eg. 1rem, 50px)
+/// @param {string} $type - defines if `margin` or `padding` is applied
+/// @param {string} $orientation - defines if the spacing is `horizontal` or `veritcal`
+/// @group tools-helpers
+@mixin add-spacing( $value, $type: margin, $orientation: vertical) {
+    @if $orientation==vertical {
+        #{ $type }-top: $value;
+        #{ $type }-bottom: $value;
+    }
+    @else {
+        #{ $type }-left: $value;
+        #{ $type }-right: $value;
+    }
+}
+
+
+
+/// Removes the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @group tools-helpers
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+
+/// @ignore  
+/// ====== Apply default transition or passed in values ======
+
+@mixin transition($transition...) {
+    // TODO: update to call map of transition types?
+    @if length($transition) == 0 {
+    transition: all .2s ease-in-out;
+    } @else {
+    transition: $transition;
+    }
+}
+
+
+/// ### Link Colors.
+/// Use this to quickly apply the base, hover, focus, and active colors 
+/// In the Saatva Theme, you also have access to pre-set mixins that folow the [color map](saatva-colors.html):
+/// - `link-activeBase()`
+/// - `link-activeDark()`
+/// - `link-activeText()`
+/// - `link-activeNav()`
+/// @group tools-helpers
+/// @name link-colors
+/// @param {String} $color [] - base color of link (and visisted color)
+/// @param {String} $hoverColor [color] - optional
+/// @param {String} $focusColor [hoverColor] - optional
+/// @param {String} $activeColor [focusColor] - optional
+/// 
+/// @example
+///   .element1 {
+///       @include link-colors(blue, purple);
+///   }
+@mixin link-colors($color, $hoverColor: $color, $focusColor: $hoverColor, $activeColor: $focusColor) {
+    color: $color;
+
+    &:visited {
+        color: $color;
+    }
+
+    &:hover {
+        color: $hoverColor;
+    }
+
+    &:focus {
+        color: $focusColor;
+    }
+
+    &:active {
+        color: $activeColor;
+    }
+}
+
+/// @ignore  
+/// ====== Apply hover pseudo class ======
+
+@mixin hover() {
+    &:hover {
+        @content;
+    }
+}
+
+/// @ignore  
+/// ====== Apply hover and foucs pseudo classes ======
+
+@mixin hover-focus($activeClass: null) {
+    @if $activeClass !=null {
+        &:hover,
+        &:focus,
+        &.#{$activeClass} {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:focus {
+            @content;
+        }
+    }
+}
+
+/// @ignore  
+/// ====== Apply hover and active pseudo classes ======
+
+@mixin hover-active($activeClass: null) {
+    @if $activeClass !=null {
+        &:hover,
+        &:active,
+        &.#{$activeClass} {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active {
+            @content;
+        }
+    }
+}
+
+/// ### Hover, Focus and Active states.
+/// When working with elements that require user interaction, you'll often need to control the `:hover`, `:focus`, and `:active` states of the element and sometimes those states will have the same styling across the board. To make things a little easier you have access to all combinations of thsese states along with a custom active class.
+/// @group tools-helpers
+/// @name hover-focus/hover-active/focus-active/hover-focus-active
+/// @param {String} $activeClass [null] - optional active class
+/// 
+/// @example
+///   .element1 {
+///       @include focus-active {
+///         color:  red;
+///       }
+///   }
+///
+///   .element2 {
+///       @include focus-active('is-active') {
+///         color:  red;
+///       }
+///   }
+@mixin focus-active($activeClass: null) {
+    @if $activeClass !=null {
+        &:focus,
+        &:active,
+        &.#{$activeClass} {
+            @content;
+        }
+    } @else {
+        &:focus,
+        &:active {
+            @content;
+        }
+    }
+}
+
+/// @ignore  
+/// ====== Apply hover, focus and active pseudo classes ======
+
+@mixin hover-focus-active($activeClass: null) {
+    @if $activeClass !=null {
+        &:hover,
+        &:focus,
+        &:active,
+        &.#{$activeClass} {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:focus,
+        &:active {
+            @content;
+        }
+    }
+}
+
+
+/// Generates the `background-image` property leveraging the webp format when available. 
+/// __**NOTE**__ For webp images to be properly displayed ($useWebp=true), the feature-indicator 
+///              class 'webp' must be present on an ancestor of the target node.
+/// @group tools-helpers
+/// @param {String} $filepath [-] - the path of the image file, excluding the extension
+/// @param {String} $extension [-] - the original extension of the image file
+/// @param {Boolean} $hasWebpFile [-] - whether there is a webp version of the image available
+/// 
+/// @example
+///   .element2 {
+///       @include responsive-dpi-img('/static/assets/home/mobile/1x/m_imageName@1x', jpg, true);
+///   }
+@mixin use-webp-if-available($filepath, $extension, $hasWebpFile) {
+    background-image: url('#{$filepath}.#{$extension}');
+    @if ($hasWebpFile == true) {
+        .webp & {
+            background-image: url('#{$filepath}.webp');
+        }
+    }
+}
+
+/// Generates 1x and 2x background image definitions for mobile, tablet, and desktop 
+/// @group tools-helpers
+/// @param {String} $page [-] - page directory (e.g. home, adjustable, compare, etc)
+/// @param {String} $name [-] - name of file without device and res declaration (e.g. for `m_<name>@1x.jpg`)
+/// @param {String} $type [-] - file type (e.g. for `m_filename@1x.<type>`)
+/// @param {Boolean} $excludeTablet [false] - pass 'true' to exclude tablet breakpoint
+/// @param {Boolean} $hasWebpFiles [-] - whether there are webp versions of the images available
+/// 
+/// @example
+///   .element1 {
+///       @include responsive-dpi-img(home, video_poster, jpg, true, true);
+///		  background-position: top center;
+///	      background-repeat: no-repeat;
+///		  background-size: cover;
+///   }
+@mixin responsive-dpi-img($page, $name, $type:jpg, $excludeTablet:false, $hasWebpFiles:false) {
+    @include use-webp-if-available('/static/assets/#{$page}/mobile/1x/m_#{$name}@1x', $type, $hasWebpFiles);
+
+	@if ($excludeTablet == false) {
+		@include breakpoint(md) {
+            @include use-webp-if-available('/static/assets/#{$page}/tablet/1x/t_#{$name}@1x', $type, $hasWebpFiles);
+		}
+	}
+
+    @include breakpoint(lg) {
+        @include use-webp-if-available('/static/assets/#{$page}/desktop/1x/#{$name}@1x', $type, $hasWebpFiles);
+    }
+    
+    @media screen and (min-resolution: 192dpi) {
+        @include use-webp-if-available('/static/assets/#{$page}/mobile/2x/m_#{$name}@2x', $type, $hasWebpFiles);
+		
+		@if ($excludeTablet == false) {
+			@include breakpoint(md) {
+                @include use-webp-if-available('/static/assets/#{$page}/tablet/2x/t_#{$name}@2x', $type, $hasWebpFiles);
+			}
+		}
+
+        @include breakpoint(lg) {
+            @include use-webp-if-available('/static/assets/#{$page}/desktop/2x/#{$name}@2x', $type, $hasWebpFiles);
+        }
+    }
+}
+
+
+/// Generates the `image-set` property and a `url` fallback  
+/// __**NOTE**__ This is NOT supported across all browsers. For now, use [responsive-dpi-img](tools-helpers.html#mixin--responsive-dpi-img)
+/// @group tools-helpers
+/// @param {String} $path [-] - the path for all 
+/// 
+/// @example
+///   .element2 {
+///       @include responsive-img('/static/assets/home/m_betterprice');
+///
+///       @include breakpoint(md) {
+///         @include responsive-img('/static/assets/home/betterprice');
+///       }
+///   }
+@mixin responsive-img($path, $type:jpg) {
+    $path1x: '#{$path}@1x.#{$type}';
+    $path2x: '#{$path}@2x.#{$type}';
+
+    background-image: url($path1x);
+    // TODO: add webp version
+    background-image: image-set(
+        url($path1x) 1x,
+        url($path2x) 2x
+    );
+}
+
+
+/// @ignore  
+/// ====== Return either a light or dark color based on the background for correct contrast ======
+
+@function yiq-color($color) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+    @if ($yiq >= $yiq-contrasted-threshold) {
+      @return $yiq-text-dark;
+    } @else {
+      @return $yiq-text-light;
+    }
+}

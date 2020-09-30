@@ -1,0 +1,219 @@
+//-------------------------------------------
+// Alignment Styles
+// ------------------------------------------
+
+/// ### Text Alignment
+/// Styles `text-align` property with the following appendicies:
+/// ```
+/// -textCenter  
+/// -textLeft  
+/// -textRight
+/// ```
+/// @example html
+/// <div class="u-textRight">Orlando wants the text to the right</div>
+/// @group utils-alignment
+
+.u-textCenter {
+    text-align: center;
+}
+
+.u-textLeft {
+    text-align: left;
+}
+
+.u-textRight {
+    text-align: right;
+}
+
+/// ### Text Alignment with flexbox!
+/// Styles an entire block of text, justified left, right, or center. Similar to the simple `text-align` utilities, you can use these appendicies:
+/// ```
+/// -textCenterFlex
+/// -textLeftFlex
+/// -textRightFlex
+/// ```
+/// @example html
+/// <p class="u-textLeftFlex">
+/// <p>Orlando wants the text to the left</p>
+/// <button class="btn btn--primary">Left button</button>
+/// @group utils-alignment
+
+.u-textCenterFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.u-textLeftFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.u-textRightFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+@each $val in $breakpoints {
+    // @if length($val)==1 {
+    //     $namespace: nth($val, 1);
+    //     @include grid-sizes( $namespace );
+    //     @include grid-flex-mods( $namespace );
+    // }
+    // @else {
+    $namespace: nth($val, 1);
+    $size: nth($val, 2);
+
+    @media only screen and (min-width: #{$size}) {
+        .u-textCenterFlex--#{$namespace} {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .u-textLeftFlex--#{$namespace} {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .u-textRightFlex--#{$namespace} {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+        }
+    }
+}
+
+
+@mixin eachUtils($mapName, $styleKey, $classElement) {
+
+    @each $val in $breakpoints {
+        $namespace: nth($val, 1); //xs, sm, md, lg
+        $size: nth($val, 2); //000px
+    
+        @media only screen and (min-width: #{$size}) {
+
+            @each $prop-namespace, $prop in $mapName {
+                @if $namespace == 'xs' {
+                    @if $prop-namespace == null {
+
+                        .u-#{$classElement} {
+
+                            #{$styleKey}: $prop; 
+
+                        }
+                    } @else {
+                        .u-#{$classElement}--#{$prop-namespace} {
+
+                            #{$styleKey}: $prop; 
+
+                        }
+                    }
+                } @else {
+                    @if $prop-namespace == null {
+                        .u-#{$classElement}--#{$namespace} {
+                            #{$styleKey}: $prop; 
+                        }
+                    } @else{
+                        .u-#{$classElement}--#{$namespace}-#{$prop-namespace} {
+                            #{$styleKey}: $prop; 
+                        }
+                    }
+                }
+
+
+            }
+
+        }
+    }
+} 
+
+/// ### Flex Alignment
+/// Styles `flex*` property with the following appendices:
+/// ```
+/// -flexDisplay
+/// -flexDisplay--inline
+///
+/// -flexJustify
+/// -flexJustify--center
+/// -flexJustify--flexStart
+/// -flexJustify--flexEnd
+/// -flexJustify--spaceAround
+/// -flexJustify--spaceBetween
+/// -flexJustify--spaceEvenly
+///
+/// -flexAlign
+/// -flexAlign--baseline
+/// -flexAlign--center
+/// -flexAlign--flexEnd
+/// -flexAlign--flexStart
+/// -flexAlign--stretch
+///
+/// -flexDirection
+/// -flexDirection--column
+/// -flexDirection--columnReverse
+/// -flexDirection--row
+/// -flexDirection--rowReverse
+/// -flexOne // flex: 1
+/// ```
+/// pattern for breakpoints (like grid columns):
+/// `u-<property>--<breakpoint>-<property>`  
+/// ex: `u-flexDisplay--sm-inline`
+/// @example html
+/// <div class="u-flexDisplay u-flexJustify--center u-flexAlign--flexStart" style="height: 100px; width: 100%">
+///     <div class="">Meredith would like her text horizontally centered and vertically aligned at the top.</div>
+/// </div>
+/// @group utils-flex
+
+$flex-displays: (
+    null: flex,
+    "inline": inline-flex,
+    "flex": flex,
+) !default;
+
+$flex-justify: (
+    null: null,
+    "spaceBetween": space-between,
+    "spaceAround": space-around,
+    "spaceEvenly": space-evenly,
+    "flexStart": flex-start,
+    "flexEnd": flex-end,
+    "center": center
+) !default;
+
+$flex-align: (
+    null: null,
+    "center": center,
+    "stretch": stretch,
+    "baseline": baseline,
+    "flexStart": flex-start,
+    "flexEnd": flex-end
+) !default;
+
+$flex-directions: (
+    null: null,
+    "row": row,
+    "rowReverse": row-reverse,
+    "column": column,
+    "columnReverse": column-reverse
+    ) !default;
+
+$flex-one: (
+    null: 1
+    ) !default;
+
+@include eachUtils($flex-displays, display, 'flexDisplay');
+@include eachUtils($flex-justify, justify-content, 'flexJustify');
+@include eachUtils($flex-align, align-items, 'flexAlign');
+@include eachUtils($flex-directions, flex-direction, 'flexDirection');   
+
+@include eachUtils($flex-one, flex, 'flexOne');

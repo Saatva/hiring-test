@@ -1,0 +1,370 @@
+//-------------------------------------------
+// Objects - Grid
+// ------------------------------------------
+
+/// # Grid System  
+/// The grid system is based on the idea of a __separation of layout and content__. This means that the grid classes should control all layout aspects of a page.  
+/// 
+/// In addition to your standard three-up card row, you can use the grid system to position blocks of text within a section without applying position styling to the element itself. 
+///
+/// ## General Usage:
+///     1. A basic grid element will have row that contains at least one column  
+///     2. All columns will require two classes: 'col' AND a width definitiion class (e.g. 'col-xs-3')  
+///     3. Modifiers should go at the end of the grid class list  
+///     4. All grid classes should go before non-grid classes  
+/// @example html
+/// <div class="row row--center-sm row--start-md">
+///     <div class="col col--xs-12 col--sm-3 col--md-2 col--lg-1">
+///         <div class="example-box">1</div>
+///     </div>
+///     <div class="col col--xs-6 col--sm-6 col--md-8 col--lg-10">
+///         <div class="example-box">2</div>
+///     </div>
+///     <div class="col col---first-xs col---last-lg col--xs-6 col--sm-3 col--md-2 col--lg-1">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+/// @group objects-grid
+
+
+/// ## The Most Basic Grid  
+/// The most basic grid layout consists of a Row with a number of Columns. By default the Column element will fit to the content inside of it with the col class added to it:s  
+/// @example html
+/// <div class="row">
+///     <div class="col ">
+///         <div class="example-box">1</div>
+///     </div>
+///     <div class="col">
+///         <div class="example-box">2</div>
+///     </div>
+///     <div class="col">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+/// @group objects-grid-ex
+
+/// ## Fill the remaining space 
+/// If you want a column to fill the remainder of the space, add the modifier col--fill: 
+/// @example html
+/// <div class="row">
+///    <div class="col col--fill">
+///        <div class="example-box">1</div>
+///    </div>
+///    <div class="col">
+///        <div class="example-box">2</div>
+///    </div>
+///    <div class="col">
+///        <div class="example-box">3</div>
+///    </div>
+/// </div>
+/// @group objects-grid-ex
+
+/// If more than one item is set to fill the remaining space, they will share the remaining space equally: 
+/// @example html
+/// <div class="row">
+///     <div class="col col--fill">
+///         <div class="example-box">1</div>
+///     </div>
+///     <div class="col">
+///         <div class="example-box">2</div>
+///     </div>
+///     <div class="col col--fill">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+/// @group objects-grid-ex
+
+
+/// ## Sizing a Column 
+/// The grid works off of a 12 point scale. When defining the column width you are defining the number of columns out of 12 it will span. For example, a column spanning "6" will span half of the full width of the Row as 6 is half of 12.
+/// 
+/// It's important to note that if a row has a span of columns equaling more than 12, the columns will begin to wrap.
+/// 
+/// In __Example 1__ you'll see a row with a column span of 3, 6, and 3. In __Example 2__ you'll see a span of 3, 7, and 3, which will force the third column to wrap. Finally, in __Example 3__ you'll see we can modify the column to instead fill the remaining space rather than explictly setting the width.
+/// 
+/// @example html
+/// <!-- Example 1 -->
+/// <div class="row">
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+///     <div class="col col--xs-6">
+///         <div class="example-box">6</div>
+///     </div>
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+///
+/// @example html
+/// <!-- Example 2 -->
+/// <div class="row">
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+///     <div class="col col--xs-7">
+///         <div class="example-box">6</div>
+///     </div>
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+///
+/// @example html
+/// <!-- Example 3 -->
+/// <div class="row">
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+///     <div class="col col--fill">
+///         <div class="example-box">6</div>
+///     </div>
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+/// @group objects-grid-ex
+
+
+/// ## Responsive Breakpoints
+/// When you define a width, you will also be defining the screen-size that width will apply to. The width/breakpoint modifier class will look something like `col--xs-3` => `col--{breakpoint}-{column span}`. The classes are defined and applied mobile first, meaning if a column should behave the same on all screen widths, you will use the smallest breakpoint, `xs`. To add a breakpoint, just add another class after the `xs`. 
+/// 
+/// @example html
+/// <!-- Example 4: columns span 3, 6, and 3 on all screen sizes -->
+/// <div class="row">
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+///     <div class="col col--xs-6">
+///         <div class="example-box">6</div>
+///     </div>
+///     <div class="col col--xs-3">
+///         <div class="example-box">3</div>
+///     </div>
+/// </div>
+///
+/// @example html
+/// <!-- Ex. 5: columns span 12 on mobile, but on anything above the 'md' breakpoint will span 3, 6, and 3 -->
+/// <div class="row">
+///     <div class="col col--xs-12 col--md-3">
+///         <div class="example-box">xs-12 | md-3</div>
+///     </div>
+///     <div class="col col--xs-12 col--md-6">
+///         <div class="example-box">xs-12 | md-6</div>
+///     </div>
+///     <div class="col col--xs-12 col--md-3">
+///         <div class="example-box">xs-12 | md-3</div>
+///     </div>
+/// </div>
+/// @group objects-grid-ex
+
+
+/// ## Column Offsets
+/// In addition to column sizes, you can add an `offset` to a column to move it to the right a certain number of columns. This is especially useful when "floating" a paragraph to the right as many designs require. The great part is, you can control it on a per-breakpoints basis as well!
+/// 
+/// @example html
+/// <div class="row">
+///     <div class="col col--xs-12 col--offset-md-4 col--md-4 col--offset-lg-8 col--lg-4">
+///         <div class="example-box">xs-12 | md-4 | lg-4</div>
+///     </div>
+/// </div>
+/// @group objects-grid-ex
+
+$grid-columns: 12 !default;
+$grid-gutter: spacer(sm) !default;
+$grid-gutter-desktop: spacer(base) !default;
+$grid-gutter-vertical: spacer(2xl);
+// TODO: add variant gutters based on design container and spacing direction
+
+/** Grid breakpoints **/
+$grid-breakpoints: $breakpoints !default;
+
+/** calculate column percentages based on number of columns **/
+@function calc-col-percent($column-num) {
+    @return $column-num / $grid-columns * 100%;
+}
+
+
+/** calculate margin and padding using @spacing mixin and gutter definitiions 
+    ex: @include add-spacing( ( -$grid-gutter), margin, horizontal);
+*/
+
+
+/// ## Rows
+/// @group objects-grid
+
+
+/// @group objects-grid
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    @include add-spacing( ( -$grid-gutter), margin, horizontal);
+    width: calc(100% + (#{$grid-gutter} * 2));
+    @include breakpoint(lg){
+        @include add-spacing( ( -$grid-gutter-desktop), margin, horizontal);
+        width: calc(100% + (#{$grid-gutter-desktop} * 2));
+    }
+}
+
+/// ### Row Modifiers
+/// @group objects-grid
+
+/// @group objects-grid
+.row--reverse {
+    flex-direction: row-reverse;
+}
+
+/// @group objects-grid
+.row--gutter {
+
+    .col {
+        padding-bottom: $grid-gutter-vertical;
+
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+}
+
+/// ## Columns
+/// @group objects-grid
+
+/// @group objects-grid
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-height: 1px;
+    @include add-spacing( ( $grid-gutter), padding, horizontal);
+    @include breakpoint(lg){
+        @include add-spacing( ( $grid-gutter-desktop), padding, horizontal);
+    }
+}
+
+/// ### Column Modifiers
+/// @group objects-grid
+
+/// @group objects-grid
+.col--fill {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+}
+
+/// @group objects-grid
+.col--reverse {
+    flex-direction: column-reverse;
+}
+
+/// @group objects-grid
+.row--gutter {
+    .col:not(:last-of-type) {
+        padding-left: spacer(base);
+        padding-right: spacer(base);
+    }
+}
+
+
+/** generates column widths based on the number of columns (eg. col--md-6) **/
+@mixin grid-sizes( $namespace ) {    
+    @for $i from 1 through $grid-columns {
+        .col--#{$namespace}-#{$i} {
+            flex-basis: calc-col-percent($i);
+            max-width: calc-col-percent($i);
+        }
+    }
+    @for $i from 1 through $grid-columns {
+        // exclude .offset class in last column
+        @if ( $i !=$grid-columns) {
+            .col--offset-#{$namespace}-#{$i} {
+                margin-left: calc-col-percent($i);
+            }
+        }
+    }
+    .col--offset-#{$namespace}-reset {
+        margin-left: 0;
+    }
+}
+
+/** generates modifications to align and justify items (eg. row--start-md) **/
+@mixin grid-flex-mods( $namespace ) {
+    .row--start-#{$namespace} {
+        justify-content: start;
+        text-align: start;
+    }
+    .row--center-#{$namespace} {
+        justify-content: center;
+        text-align: center;
+    }
+    .row--end-#{$namespace} {
+        justify-content: flex-end;
+        text-align: end;
+    }
+    .row--top-#{$namespace} {
+        align-items: flex-start;
+    }
+    .row--middle-#{$namespace} {
+        align-items: center;
+    }
+    .row--bottom-#{$namespace} {
+        align-items: flex-end;
+    }
+    .row--around-#{$namespace} {
+        justify-content: space-around;
+    }
+    .row--between-#{$namespace} {
+        justify-content: space-between;
+    }
+
+    .row--direction-col-#{$namespace} {
+        flex-direction: column;
+    }
+
+    .row--direction-row-#{$namespace} {
+        flex-direction: row;
+    }
+
+    .col--order-first-#{$namespace} {
+        order: -1;
+    }
+    .col--order-last-#{$namespace} {
+        order: 1;
+    }
+    .col--order-reset-#{$namespace} {
+        order: 0;
+    }
+}
+
+
+/** for each breakpoint, create column widths and flex modifications **/
+@each $val in $grid-breakpoints {
+    @if length($val)==1 {
+        $namespace: nth($val, 1);
+        @include grid-sizes( $namespace );
+        @include grid-flex-mods( $namespace );
+    }
+    @else {
+        $namespace: nth($val, 1);
+        $size: nth($val, 2);
+        @media only screen and (min-width: #{$size}) {
+            @include grid-sizes( $namespace );
+            @include grid-flex-mods( $namespace );
+        }
+
+    @media only screen and (max-width: #{$size}) {
+        .row--gutter-#{$namespace} {
+            & > .col {
+                margin-bottom: $grid-gutter-vertical;
+                
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    }
+}

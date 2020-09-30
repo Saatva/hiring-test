@@ -1,0 +1,35 @@
+//-------------------------------------------
+// Color Styles
+// ------------------------------------------
+
+
+$contrast-bgColors: (
+  null: color(contrast, white),
+  "--contrast1": color(contrast, 1),
+  "--contrast2": color(contrast, 2),
+  "--contrast3": color(contrast, 3),
+  "--contrast4": color(contrast, 4),
+  "--contrastWhite": color(contrast, white)
+) !default;
+
+
+
+@each $contrast-namespace, $contrast in $contrast-bgColors {
+
+    .u-bgColor#{$contrast-namespace} {
+        background-color: $contrast; 
+    }
+
+}
+
+@each $contrast-namespace, $contrast in $contrast-bgColors {
+
+  .u-borderTopColor#{$contrast-namespace} {
+      border-bottom: solid 1px $contrast; 
+  }
+
+  .u-borderBottomColor#{$contrast-namespace} {
+    border-bottom: solid 1px $contrast; 
+  }
+
+}

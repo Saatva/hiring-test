@@ -1,0 +1,29 @@
+//-------------------------------------------
+// Settings - Layout Variables
+// ------------------------------------------
+
+/// If you don't want all defaults applied to the foundation of your site and instead wish to pick and choose which base defaults are applied, set `$default-setup` to `false`.  
+/// 
+/// The HTML primitives that are styled by default are: `<body>`, `<p>`, `<a>`.
+///
+/// View [`the mixins`](tools-base.html) available to apply base styles.
+/// @group settings-globals
+$use-default-setup: true !default;
+
+/// If you don't want all `<button>` elements to have their styles reset, change this variable to `false`.
+/// @group settings-globals
+$use-button-reset: true !default;
+
+/// Sets the grid point system that all spacing and rem calculations are based on.
+/// @group settings-globals
+$global-baseline:           16 !default;
+
+/// Sets the font point system that all font (rem) calculations are based on.
+/// @group settings-globals
+$global-font-baseline:          16 !default;
+
+
+$body-color:              #000 !default;
+$body-bg:                 #fff !default;
+$link-color:                $scaffold !default;
+$link-color-hover:          darken($link-color, 20%) !default;

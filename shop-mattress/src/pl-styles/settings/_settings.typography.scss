@@ -1,0 +1,27 @@
+//-------------------------------------------
+// Settings - Typography
+// ------------------------------------------
+
+// fonts
+$fontFamily-sans-serif:     "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$fontFamily-serif:          "Times New Roman", Times, Georgia, serif !default;
+$fontFamily-monospace:      SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$fontFamily-base:           $fontFamily-sans-serif !default;
+
+
+// font-size
+$fontSize-base:            $global-font-baseline * 1px !default;
+
+// line-height
+$lineHeight-base:          1.75 !default;
+
+// font-weight
+$fontWeight-light:         300 !default;
+$fontWeight-base:          400 !default;
+$fontWeight-bold:          600 !default;
+
+// letter-spacing
+$letterSpacing-narrow:     .5px !default;
+$letterSpacing-base:       normal !default;
+$letterSpacing-wide:       1px !default;
+$letterSpacing-wider:      1.5px !default;

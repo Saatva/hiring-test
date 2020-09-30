@@ -1,0 +1,296 @@
+//-------------------------------------------
+// Tools - Base
+// ------------------------------------------
+
+/// Creates font-size in `rem`.
+/// @group tools-typography
+/// @param {number (unitless)} $fontSize [-]
+///   Specifies the font-size in px
+///
+/// @example
+/// // given $global-font-baseline: 16  
+/// .element {
+///     font-size: set-fontSize(24);
+/// }
+@function set-fontSize($fontSize) {
+    @return (strip-unit($fontSize) / $global-font-baseline) * 1rem;
+}
+
+/// Converts a `px` line-height to a unitless value. When we make the line height unitless, the browser preserves the font-size:line-height ratio even when the font size changes. 
+///
+/// For example, if the font-size of a heading in mobile computes to 20px and the line-height is 1.5, the computed pixel value is 30. However, if in desktop the font-size changes to 24, the computed line-height will change accordingly to 36, as expected. 
+/// @group tools-typography
+/// @param {number (unitless)} $lineHeight [-]
+///   Specifies the line-height in px
+///
+/// @param {number (unitless)} $fontSize [-]
+///   Specifies the font-size in px
+///
+/// @example
+/// .element {
+///     line-height: set-lineHeight(24px, 16px);
+/// }
+@function set-lineHeight($lineHeight, $fontSize) {
+    /// @ignore assuming that a ratio line-height will never be greater than 4 and that a 'px' font-size will never be less than 4px
+    @if ($lineHeight == normal) {
+        @return $lineHeight;
+    }
+    
+    @if ($lineHeight > 4) {
+        @return (strip-unit($lineHeight) / strip-unit($fontSize));
+    }
+    
+    @return $lineHeight;
+}
+
+
+/// Creates a complete font-size and line-height rule set.
+/// 
+/// @group tools-typography
+/// @param {number} $fontSize [-]
+///   Specifies the font-size in px equivalent
+///
+/// @param {number} $line-height [1.2]
+///   _(optional)_ Specifies the line-height; if one is not set, it will default to 1.2
+///
+/// @example
+/// // given $global-font-baseline: 16  
+/// .element {
+///     @include set-font(24, 1);
+/// }
+@mixin set-font($fontSize, $lineHeight: 1.2) {
+    font-size: set-fontSize($fontSize);
+
+    @if ($lineHeight != 1.2) {
+        line-height: set-lineHeight($lineHeight, $fontSize);
+    } @else {
+        line-height: $lineHeight;
+    }
+}
+
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin letter-spacing($spacing: $letterSpacing-base) {
+    letter-spacing: $spacing;
+}
+
+/// Creates an entire responsive font styling with the standard rule sets. If tablet or desktop sizes do not vary from the mobile sizes, a breakpoint will not be added (but you will still need to explicitly set tablet variables to define desktop variables. For example, if the fontsize is the same on tablet and mobile, you will have to use `@include typography(18, 1, 300, uppercase, 18, 1, 21);`
+///
+/// You may instead prefer to use [@mixin makeTypoClasses](#mixin--makeTypoClasses) to setup your typography stylings as well for a component and its pieces.
+/// @group tools-typography
+/// @param {number} $size [-]
+///   Specifies the `font-size` in px for mobile (can be unitless)
+///
+/// @param {number} $lineHeight [-]
+///   Specifies the `line-height` for mobile
+///
+/// @param {number} $weight [-]
+///   Specifies the `font-weight`.  
+///   If you need a different weight for desktop, you can add it to the class declaration separately
+///
+/// @param {string} $transform [-]
+///   Specifies the `text-transform` value
+///
+/// @param {number} $size-tablet [$size]
+///   _(optional)_ Specifies the `font-size` in px for tablet (md)
+///
+/// @param {number} $lineHeight-tablet [$lineHeight]
+///   _(optional)_ Specifies the `line-height` for tablet (md)
+///
+/// @param {number} $size-desktop [$size]
+///   _(optional)_ Specifies the `font-size` in px for desktop (lg)
+///
+/// @param {number} $lineHeight-desktop [$lineHeight]
+///   _(optional)_ Specifies the `line-height` for desktop (lg)
+///
+/// @example
+/// .element {
+///     @include typography(18, 1, 300, uppercase, 21);
+/// }
+@mixin typography (
+    $size,
+    $lineHeight,
+    $weight,
+    $transform,
+    $size-tablet: null,
+    $lineHeight-tablet: null,
+    $size-desktop: null,
+    $lineHeight-desktop: null
+) {
+    @include set-font($size, $lineHeight);
+    font-weight: $weight;
+    text-transform: $transform;
+    @include font-smoothing();
+    
+    $hasFontTablet: $size-tablet != null or $lineHeight-tablet != null;
+    $hasFontDesktop: $size-desktop != null or $lineHeight-desktop != null;
+
+
+    @if ($hasFontTablet) {
+        @include media-query-up(md) {
+            @if ($size-tablet != null ) {
+                font-size: set-fontSize($size-tablet);
+            }
+            @if ($lineHeight-tablet != null) {
+                line-height: set-lineHeight($lineHeight-tablet, $size-tablet);
+            }
+        }
+    }
+
+    @if ($hasFontDesktop) {
+        @include media-query-up(lg) {
+            @if ($size-desktop != null ) {
+                font-size: set-fontSize($size-desktop);
+            }
+            @if ($lineHeight-desktop != null) {
+                line-height: set-lineHeight($lineHeight-desktop, $size-desktop);
+            }
+        }
+    }
+    
+}
+
+@function get-typo($typography-map, $prop: 'size') {
+    @return map-get($typography-map, $prop);
+}
+
+$example-typography-map: (
+    'box__header': (
+        'size':           36,
+        'size-desktop':   42,
+        'lineHeight':     1.33,
+        'lineHeight-desktop':     1.63,
+        'weight':         300,
+        'transform':      none,
+    ),
+    'box__content': (
+        'size':           14,
+        'size-tablet':    16,
+        'size-desktop':   18,
+        'lineHeight':     1.33,
+        'weight':         300,
+        'transform':      none,
+    )
+);
+
+/// Generates an exhaustive typography class with responsive styles
+///
+/// The full set of coniguration options for any type style are:  
+/// fontFamily  
+/// color  
+/// size  
+/// size-tablet  
+/// size-desktop  
+/// lineHeight  
+/// lineHeight-tablet  
+/// lineHeight-desktop  
+/// weight  
+/// weight-desktop  
+/// transform   
+/// letterSpacing  
+/// marginBottom  
+/// marginBottom-desktop  
+///
+/// @group tools-typography
+/// @param {map} $typo-map [-]
+///   Specifies the `font-size` in px for mobile
+///
+/// @param {string} $prefix [.t-]
+///   Specifies the prefix to the key name of the map to create the selector
+///
+/// @example
+/// /* given this map 
+/// $example-typography-map: (
+///    'box__header': (
+///        'size':           36,
+///        'size-desktop':   42,
+///        'lineHeight':     1.33,
+///        'lineHeight-desktop':     1.63,
+///        'weight':         300,
+///        'transform':      none,
+///    ),
+///    'box__content': (
+///        'size':           14,
+///        'size-tablet':    16,
+///        'size-desktop':   18,
+///        'lineHeight':     1.33,
+///        'weight':         300,
+///        'transform':      none,
+///    )
+///  ); */
+///  @include makeTypoClasses($example-typography-map, '.');
+///
+@mixin makeTypoClasses($typo-map, $prefix: '.t-') {
+    @each $typo, $value in $typo-map {
+        #{$prefix}#{$typo} {
+            $size: get-typo($value, 'size');
+            $size-tablet: null;
+            $size-desktop: null;
+            $lineHeight: get-typo($value, 'lineHeight');
+            $lineHeight-tablet: null;
+            $lineHeight-desktop: null;
+            $weight: get-typo($value, 'weight');
+            $weight-desktop: null;
+            $transform: get-typo($value, 'transform');
+            $marginBottom: get-typo($value, 'marginBottom');
+            $marginBottom-desktop: get-typo($value, 'marginBottom');
+
+            $spacing: normal;
+            @if (map-has-key($value, 'letterSpacing')) {
+                $spacing: get-typo($value, 'letterSpacing');
+            }
+
+            @if (map-has-key($value, 'weight')) {
+                $weight-d: get-typo($value, 'weight-desktop');
+                $weight: get-typo($value, 'weight');
+
+                @include media-query-up(sm) {
+                    font-weight: $weight-desktop;
+                }
+            }
+
+            @if (map-has-key($value, 'marginBottom-desktop')) {
+                $marginBottom-desktop: get-typo($value, 'marginBottom-desktop');
+                margin-bottom: $marginBottom;
+
+                @include media-query-up(sm) {
+                    margin-bottom: $marginBottom-desktop;
+                }
+
+            } @else {
+                margin-bottom: $marginBottom;
+            }
+
+            @if (map-has-key($value, 'fontFamily')) {
+                font-family: get-typo($value, 'fontFamily');
+            }
+            
+            @if (map-has-key($value, 'size-desktop')) {
+                $size-desktop: get-typo($value, 'size-desktop');
+            }
+            
+            @if (map-has-key($value, 'size-tablet')) {
+                $size-tablet: get-typo($value, 'size-tablet');
+            }
+
+            @if (map-has-key($value, 'lineHeight-desktop')) {
+                $lineHeight-desktop: get-typo($value, 'lineHeight-desktop');
+            }
+            
+            @if (map-has-key($value, 'lineHeight-tablet')) {
+                $lineHeight-tablet: get-typo($value, 'lineHeight-tablet');
+            }
+
+            @if (map-has-key($value, 'color')) {
+                color: get-typo($value, 'color');
+            }
+
+            letter-spacing: $spacing;
+            @include typography($size, $lineHeight, $weight, $transform, $size-tablet, $lineHeight-tablet, $size-desktop, $lineHeight-desktop);
+        }
+    }
+}

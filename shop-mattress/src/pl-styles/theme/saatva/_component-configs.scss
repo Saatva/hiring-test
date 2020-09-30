@@ -1,0 +1,322 @@
+//-------------------------------------------
+// Component Custom Styles
+// ------------------------------------------
+
+// Predefined Colors
+$body-color:                color(text);
+$body-bg:                   color(contrast, white);
+$link-color:                color(text);
+$link-color-hover:          color(text, hover);
+
+// Typography
+/// @example html
+/// <h1 class="t-heading1">t-heading1, 28px mobile, 36px tablet, 40px desktop.</h1>
+/// <h2 class="t-heading2">t-heading2, 24px mobile, 28px tablet, 32px desktop.</h2>
+/// <h3 class="t-heading3">t-heading3, 20px. Sinky winky, firmy wormy.</h3>
+/// <h3 class="t-heading4">t-heading4, 18px. Sinky winky, firmy wormy.</h3>
+/// <h3 class="t-heading5">t-heading5, 16px. Sinky winky, firmy wormy.</h3>
+/// <h3 class="t-heading6">t-heading6, 16px. Sinky winky, firmy wormy.</h3>
+/// <p class="t-body">t-body, 16px. Sinky winky, firmy wormy.</p>
+/// <p class="t-bodyMd">t-bodyMd, 16px. Sinky winky, firmy wormy.</p>
+/// <p class="t-bodyLg">t-bodyLg, 16px mobile, 18px desktop. Sinky winky, firmy wormy.</p>
+/// <p class="t-bodySm">t-bodySm, 14px. Sinky winky, firmy wormy.</p>
+/// <p class="t-disclaimer">t-disclaimer, 10px. Sinky winky, firmy wormy.</p>
+/// <p class="t-footer">t-footer, 12px. Sinky winky, firmy wormy.</p>
+///
+///
+/// @group saatva-typo
+$typographyTheme-custom: (
+    'heading1': (
+        'size':               28,
+        'size-tablet':        36,
+        'size-desktop':       40,
+        'lineHeight':         1.29,
+        'lineHeight-tablet':  1.33,
+        'lineHeight-desktop': 1.2,
+        'weight':             $fontWeight-light,
+        'transform':          none,
+        'marginBottom':       spacer(0),
+        'color':              color(text, heading),
+        'fontFamily':         $fontFamily-serif
+    ),
+    'heading2': (
+        'size':               24,
+        'size-tablet':        28,
+        'size-desktop':       32,
+        'lineHeight':         1.5,
+        'lineHeight-tablet':  1.43,
+        'lineHeight-desktop': 1.5,
+        'weight':             $fontWeight-light,
+        'transform':          none,
+        'marginBottom':       spacer(md),
+        'color':              color(text, heading),
+        'fontFamily':         $fontFamily-serif
+    ),
+    'heading3': (
+        'size':         20,
+        'lineHeight':   1.6,
+        'weight':       $fontWeight-light,
+        'transform':    normal,
+        'marginBottom': spacer(sm),
+        'fontFamily':   $fontFamily-serif
+    ),
+    'heading4': (
+        'size':               18,
+        'lineHeight':         1.56,
+        'weight':             $fontWeight-base,
+        'transform':          none,
+        'marginBottom':       spacer(base)
+    ),
+    'heading5': (
+        'size':         16,
+        'lineHeight':   1.75,
+        'weight':       $fontWeight-base,
+        'transform':    none,
+        'marginBottom': spacer(0)
+    ),
+    'heading6': (
+        'size':         16,
+        'lineHeight':   1.43,
+        'weight':       $fontWeight-base,
+        'transform':    uppercase,
+        'letterSpacing': 0.5px,
+        'marginBottom': spacer(0)
+    ),
+    'body': (
+        'size':                 16,
+        'lineHeight':           1.75,
+        'weight':               $fontWeight-light,
+        'transform':            none,
+    ),
+    'bodyMd': (
+        'size':                 16,
+        'lineHeight':           1.75,
+        'weight':               $fontWeight-light,
+        'transform':            none,
+        'marginBottom':         spacer(xl)
+    ),
+    'bodyLg': (
+        'size':                 16,
+        'size-tablet':          18,
+        'lineHeight':           1.75,
+        'lineHeight-desktop':   1.78,
+        'weight':               $fontWeight-light,
+        'transform':            none,
+        'marginBottom':         spacer(2xl)
+    ),
+    'bodySm': (
+        'size':         14,
+        'lineHeight':   1.71,
+        'weight':       $fontWeight-light,
+        'transform':    none,
+        'marginBottom': spacer(sm)
+    ),
+    'disclaimer': (
+        'size':         10,
+        'lineHeight':   1.6,
+        'weight':       $fontWeight-base,
+        'transform':    none,
+        'marginBottom': none,
+        'color':        color(text, recede)
+    ),
+    'footer': (
+        'size':         12,
+        'lineHeight':   1.5,
+        'weight':       $fontWeight-base,
+        'transform':    normal,
+        'marginBottom': spacer(0)
+    )
+) !default;
+
+
+// Common component dimensions
+$formControl-height: 2.5rem;
+
+// Transitions
+$dropdown-animation: transform .25s, opacity .25s;
+
+// Links (base/visited, hover, focus, active)
+@mixin link-actionBase () {
+    @include link-colors(color(action), color(action, baseHover))
+}
+
+@mixin link-actionDark () {
+    @include link-colors(color(action, dark), color(action, darkHover))
+}
+
+@mixin link-text () {
+    @include link-colors(color(text), color(text, hover))
+}
+
+@mixin link-nav () {
+    @include link-colors(color(nav), color(nav, hover))
+}
+
+// Buttons
+$btn-primary-config: (
+    text-color:           color(contrast, white),
+    bg-color:             color(cta),
+    bg-color-hover:       color(cta, baseHover),
+    bg-color-active:      color(cta, baseActive),
+    border-color:         color(cta),
+    border-color-hover:   color(cta, baseHover),
+    border-color-active:  color(cta, baseActive)
+);
+
+$btn-secondary-config: (
+    text-color:           color(action, dark),
+    bg-color:             color(contrast, white),
+    bg-color-hover:       color(action, darkHover),
+    bg-color-active:      color(action, darkActive),
+    border-color:         color(action, dark),
+    border-color-hover:   color(action, dark),
+    border-color-active:  color(action, dark)
+);
+
+// Section Background Colors
+$section-bgColors-config: (
+    alt1: color(contrast, 1),
+    alt2: color(contrast, 2)
+);
+
+$icon-colors-custom: (
+    base:        color(text),
+    article:     color(action),
+    call:        color(nav),
+    cart:        color(nav),
+    chat:        color(nav),
+    circleCheck: color(action),
+    close:       color(nav),
+    delivery:    color(text, heading),
+    finance:     color(text, heading),
+    less:        color(nav),
+    more:        color(nav),
+    navArrow:    color(nav),
+    saatvaLogo:  color(action),
+    trial:       color(text, heading),
+    warranty:    color(text, heading)
+);
+
+
+// Toggles for Radio Groups
+$formToggle-custom: (
+    text-color:           color(text, heading),
+    text-color-hover:     color(text, heading),
+    text-color-active:    color(contrast, white),
+    bg-color:             color(state),
+    bg-color-hover:       color(state, hover),
+    bg-color-active:      color(state, active),
+    border-color:         color(contrast, 3),
+    border-color-hover:   color(contrast, 3),
+    border-color-active:  color(contrast, 3),
+    borderWidth:          1px,
+    borderRadius:         0,
+    padding-x:            1rem,
+    padding-y:            .75rem,
+    textTransform:        none,
+    fontSize:             set-fontSize(15),
+    fontWeight:           $fontWeight-base,
+    lineHeight:           1,
+    letterSpacing:        normal,
+);
+
+.formRadio {
+    .formToggle {
+        border-right-width: 0px;
+    }
+
+    &:last-of-type {
+        .formToggle {
+            border-right-width: 1px;
+        }
+    }
+}
+
+// Form Checkbox
+$formCheckbox-custom: (
+    box-bg-color:           color(contrast, white),
+    box-bg-color-hover:     color(contrast, white),
+    box-bg-color-active:    color(state, active),
+    box-border:             solid 1px color(state, active),
+    box-border-focus:       solid 2px darken(color(state, active), 10%),
+    box-border-active:      solid 1px color(state, active),
+    box-width:              spacer(lg),
+    box-height:             spacer(lg),
+    check-width:            13px,
+    check-height:           7px,
+    check-color:            2px solid color(contrast, white),
+    bumper:                 spacer(base),
+    label-color:            color(text),
+    fontSize:               set-fontSize(16),
+);
+
+// Dropdown
+$dropdown-custom: (
+    text-color:             color(text),
+    fontSize:               set-fontSize(15),
+    toggle-bg-color:        color(contrast, white),
+    toggle-border:          solid 1px color(contrast, 3),
+    list-bg-color:          color(contrast, white),
+    list-border:            solid 1px color(contrast, 3),
+    icon-stroke:            color(text, heading),
+    icon-transform:         scaleY(-1),
+    drop-transition:        $dropdown-animation,
+    height:                 $formControl-height,
+    item-padding:           spacer(2xs) spacer(sm),
+    item-text-color-hover:  color(text),
+    item-bg-hover:          color(state, hover),
+    safety-height:          16rem
+);
+
+// FormTextInput
+$formTextInput-custom: (
+    initialColor: color(text),
+    hasValueColor: color(accent, text),
+    errorColor: color(negative)
+);
+
+// FormError
+$form-error-custom: (
+    color: color(negative)
+);
+
+// Form Radio
+$formRadio-custom: (
+    label-color:        color(text, heading),
+    border:             solid 1px color(action),
+    border-active:      solid 7px color(action)
+);
+
+// Loader
+$loader-custom: (
+    item-color: color(contrast, white),
+    background-color: rgba(121, 115, 107, 0.8)
+);
+
+// Review Stars
+$reviewStars-custom: (
+    fill: color(accent)
+);
+
+
+
+// ValueProp Icon Wrapper (by set)
+$valuePropIconSet-custom: (
+    'delivery': 64px
+);
+
+// ValueProp Icons
+$valuePropIcons-custom: (
+    'delivery': (
+        'height':   54px,
+        'stroke':   color(action)
+    ),
+    'remote': (
+        'height':   64px,
+        'stroke':    color(action)
+    ),
+    'removal': (
+        'height':   64px,
+        'stroke':    color(action)
+    )
+);

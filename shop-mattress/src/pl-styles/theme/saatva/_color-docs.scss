@@ -1,0 +1,110 @@
+//-------------------------------------------
+// Color Palette Creation for Docs
+// ------------------------------------------
+
+@import '../../../../node_modules/sassdoc-theme-herman/scss/utilities';
+
+/// The Semantic Color Map for Saatva takes the Saatva color values and assigns them various semantic categories that follow UX-driven design decisions. Any CSS color definition should leverage the `color()` mixin to semantically describe the element being described.
+///
+/// For example, if an element has a border around it, you will always use one of the "Contrast" border colors (defined as `color(contrast, 3)` and `color(contrast, 4)`) rather than calling their specific hex or straight variable value (ex. `$saatva-grey-border1`). 
+///
+/// An added bonus to this is that any and all future designs will follow this map. This means, if you're working off of a design mock and you see a color that's not inline with our semantic map, you can talk to Design and they will likely be able to change the color so it better matches the map definitions.
+///  
+/// The semantic color categories are broken up as such:
+/// @group saatva-colors
+
+/// ### Contrast
+/// `color(contrast, 2)` | Colors that only provide differentiation between sections of content are "contrast" colors. They include background colors and border colors. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors contrast
+
+$swatches-contrast: map-get($theme-colors, contrast);
+@include herman-add('colors', 'contrast', $swatches-contrast);
+
+/// ### Dark Contrast
+/// `color(darkContrast, 2)` | Darker colors that only provide differentiation between sections of content for light colored text are "dark contrast" colors. They include background colors and border colors. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors darkContrast
+
+$swatches-darkContrast: map-get($theme-colors, darkContrast);
+@include herman-add('colors', 'darkContrast', $swatches-darkContrast);
+
+
+
+/// ### Text
+/// `color(text, haeding)` | Colors that are used for any content-related text (e.g. not navigation or buttons necessarily) on the page and their hover states. This includes body text (and consequently links) and standard headings. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors text
+
+$swatches-text: map-get($theme-colors, text);
+@include herman-add('colors', 'text', $swatches-text);
+
+
+
+/// ### Nav
+/// `color(nav, base)` | Colors that are used for navigation-related text. This includes elements like a menu/nav or "navigation-like" elements such as tabs. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors nav
+
+$swatches-nav: map-get($theme-colors, nav);
+@include herman-add('colors', 'nav', $swatches-nav);
+
+
+
+/// ### State
+/// `color(state, hover)` | Colors that are used with elements that control user-set "state," often associated with form elements (radio buttons, checkboxes, etc). An example would be a toggle for options in the product panel.
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors state
+
+$swatches-state: map-get($theme-colors, state);
+@include herman-add('colors', 'state', $swatches-state);
+
+
+
+/// ### Action
+/// `color(action, baseActive)` | Colors that indicate a call to action for the user. Typically this is limited to buttons. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors action
+
+$swatches-action: map-get($theme-colors, action);
+@include herman-add('colors', 'action', $swatches-action);
+
+
+
+/// ### Negative
+/// `color(negative, base)` | Colors that are used to indicate a negative event has occurred or is about to occur if the user proceeds. A common element with this color are error messages.
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors negative
+
+$swatches-negative: map-get($theme-colors, negative);
+@include herman-add('colors', 'negative', $swatches-negative);
+
+
+
+/// ### Accent
+/// `color(accent, blue)` | Colors that are used to add an additional degree of emphasis to an element beyond the standard palette. Most elements that require this distinction will use the gold, but as our ux needs expands, other accent colors can be used for differentiation. 
+/// @group saatva-colors
+
+/// @group saatva-colors
+/// @colors accent
+
+$swatches-accent: map-get($theme-colors, accent);
+@include herman-add('colors', 'accent', $swatches-accent);
+
+
+
+@include herman-export;

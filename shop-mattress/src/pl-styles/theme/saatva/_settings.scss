@@ -1,0 +1,165 @@
+//-------------------------------------------
+// Settings - Colors
+// ------------------------------------------
+
+$saatva-clay: #c19678;
+$saatva-clay-dark: #b19780;
+
+$saatva-gold: #d5aa63;
+
+$saatva-ash: #6b6257;
+$saatva-earth: #463F38;
+$saatva-earth-warm: #8C8273;
+
+$saatva-error: #c80000;
+
+$saatva-white: #fff;
+$saatva-grey: #000;
+$saatva-grey-light: #909090;
+$saatva-grey-border1: #d2d2d2;
+$saatva-grey-border2: #e3e3e3;
+$saatva-grey-cool: #fafafb;
+$saatva-grey-warm: #f6f5f3;
+$saatva-grey-warmer: #f8f8f8;
+
+$saatva-red: #9C6A6A;
+$saatva-red-light: #FBF7F4;
+$saatva-blue: #365562;
+$saatva-blue-light: #F5F6F6;
+$saatva-green: #597554;
+$saatva-green-light: #F3F7F4;
+
+/**
+====== Mixes white with the color to more accurately match Sketch values ======
+*/
+@function tint($color,
+$percent) {
+    @if not _is-color($color) {
+        @error "`#{$color}` is not a valid color";
+    }
+
+    @else {
+        @return mix(#fff, $color, $percent);
+    }
+}
+
+$theme-colors: (
+    contrast: (
+        white: $saatva-white,
+        1: $saatva-grey-cool,
+        2: $saatva-grey-warm,
+        3: $saatva-grey-border1,
+        4: $saatva-grey-border2,
+        5: $saatva-grey-warmer
+    ),
+    darkContrast: (
+        1: $saatva-earth-warm,
+        2: $saatva-ash,
+        3: $saatva-earth
+    ),
+    text: (
+        base: $saatva-grey,
+        hover: $saatva-grey-light,
+        active: $saatva-grey-light,
+        recede: $saatva-grey-light,
+        heading: $saatva-ash,
+        headingDark: $saatva-earth
+    ),
+    nav: (
+        base: $saatva-ash,
+        hover: $saatva-clay-dark,
+        active: $saatva-clay-dark,
+        inactive: tint($saatva-grey, 55%)
+    ),
+    state: (
+        base: $saatva-white,
+        hover: tint($saatva-ash, 90%),
+        active: tint($saatva-ash, 40%)
+    ),
+    action: (
+        base: $saatva-clay,
+        baseHover: tint($saatva-clay, 30%),
+        baseActive: tint($saatva-clay, 30%),
+        dark: $saatva-clay-dark,
+        darkHover: tint($saatva-clay-dark, 90%),
+        darkActive: tint($saatva-clay-dark, 90%)
+    ),
+    negative: (
+        base: $saatva-error
+    ),
+    accent: (
+        base: $saatva-gold,
+        recede: tint($saatva-gold, 30%),
+        text: $saatva-clay-dark,
+        red: $saatva-red,
+        redLight: $saatva-red-light,
+        blue: $saatva-blue,
+        blueLight: $saatva-blue-light,
+        green: $saatva-green,
+        greenLight: $saatva-green-light
+    ),
+    cta: (
+        base: $saatva-gold,
+        baseHover: tint($saatva-gold, 30%),
+        baseActive: tint($saatva-gold, 30%)
+    )
+);
+
+/**
+====== Return color from color theme map ======
+*/
+@function color($theme-color, $level: 'base') {
+    @return map-get(map-get($theme-colors, $theme-color), $level);
+}
+
+
+
+// YIQ values: used to dynamically determine if text should be light or dark based on the background color
+$yiq-contrasted-threshold:  165;
+$yiq-text-dark:             color(text);
+$yiq-text-light:            color(contrast, white);
+
+
+
+// font-family settings
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('Source Sans Pro Light'), local('SourceSansPro-Light'),
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdq.eot?#iefix') format('eot'), /* IE6-IE8 */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdo.woff') format('woff'), /* Modern Browsers */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr3cOWxw.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('//fonts.gstatic.com/l/font?kit=6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdp&skey=e2b26fc7e9e1ade8&v=v11#SourceSansPro') format('svg');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'),
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7h.eot?#iefix') format('eot'), /* IE6-IE8 */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7l.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7j.woff') format('woff'), /* Modern Browsers */
+    url('//fonts.gstatic.com/s/sourcesanspro/v11/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7gujVj9w.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('//fonts.gstatic.com/l/font?kit=6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7i&skey=1e026b1c27170b9b&v=v11#SourceSansPro') format('svg');
+}
+
+@font-face {
+    font-family: 'OptimaNovaLT';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('https://www.saatva.com/fonts/OptimaNovaLT/OptimaNovaLT.eot');
+    src: url('https://www.saatva.com/fonts/OptimaNovaLT/OptimaNovaLT.eot?#iefix') format('embedded-opentype'),
+    url('https://www.saatva.com/fonts/OptimaNovaLT/OptimaNovaLT.woff2') format('woff2'),
+    url('https://www.saatva.com/fonts/OptimaNovaLT/OptimaNovaLT.woff') format('woff'),
+    url('https://www.saatva.com/fonts/OptimaNovaLT/OptimaNovaLT.ttf') format('truetype');
+}
+
+
+$fontFamily-sans-serif: "Source Sans Pro", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$fontFamily-serif: "OptimaNovaLT", "Times New Roman", Times, Georgia, serif;

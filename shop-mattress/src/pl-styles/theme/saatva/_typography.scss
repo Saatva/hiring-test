@@ -1,0 +1,118 @@
+//-------------------------------------------
+// Objects - Typography
+// ------------------------------------------
+
+
+
+body {
+    @extend .t-body;
+}
+
+p {
+    @extend .t-bodyMd;
+}
+
+.t-heading1--inverse {
+    @extend .t-heading1;
+    color: color(contrast, white);
+}
+
+/// ### Text Colors
+/// You have access to colors through the listed classes:
+/// ```
+/// -t-color--white
+/// -t-color--heading
+/// -t-color--accent
+/// ```
+/// @example html
+/// <div class="u-scaffoldBg">
+///     <div class="t-color--white">Orlando wants the text to the right</div>
+/// </div>
+/// @group saatva-typo
+
+
+// add font weight / make it consistent in PL maybe, might be tabled 
+
+$content-colors: (
+  null: color(text, base),
+  "--heading": color(text, heading),
+  "--accent": color(accent, text),
+  "--accentBlue": color(accent, blue),
+  "--accentGreen": color(accent, green),
+  "--accentRed": color(accent, red),
+  "--white": color(contrast, white),
+  "--recede": color(text, recede)
+) !default;
+
+
+@each $colors-namespace, $color in $content-colors {
+
+    .t-color#{$colors-namespace} {
+        color: $color; 
+    }
+
+}
+
+$content-weights: (
+  null: $fontWeight-base,
+  "--light": $fontWeight-light,
+  "--normal": $fontWeight-base,
+  "--bold": $fontWeight-bold
+) !default;
+
+
+@each $weights-namespace, $weight in $content-weights {
+
+    .t-weight#{$weights-namespace} {
+        font-weight: $weight; 
+    }
+
+}
+
+// shorthand
+.t-bold {
+    font-weight: $fontWeight-bold;
+}
+
+.t-underline{
+    text-decoration: underline;
+}
+
+.t-italic { font-style: italic; }
+
+.t-family--serif {
+    font-family: $fontFamily-serif;
+}
+
+.t-family--sans-serif {
+    font-family: $fontFamily-sans-serif;
+}
+
+
+// link styles
+.t-link {
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        color: color(text, hover);
+    }
+
+    &--independent {
+        @include typography(14, 1.43, 400, none);
+        color: color(text);
+    }
+
+    &--inverse {
+        @include link-colors(color(contrast, white), color(contrast, 3));
+    }
+
+    &--action {
+        color: color(nav, active);
+        &:visited{ color: color(nav, active); }
+    }
+}

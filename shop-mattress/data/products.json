@@ -1,0 +1,55 @@
+{
+    "products": [
+        {
+            "sku": "classic",
+            "children": [
+                {
+                    "size": "Twin",
+                    "price": 999
+                },
+                {
+                    "size": "Queen",
+                    "price": 1299
+                },
+                {
+                    "size": "King",
+                    "price": 1499
+                }
+            ]
+        },
+        {
+            "sku": "loom",
+            "children": [
+                {
+                    "size": "Twin",
+                    "price": 1099
+                },
+                {
+                    "size": "Queen",
+                    "price": 1399
+                },
+                {
+                    "size": "King",
+                    "price": 1599
+                }
+            ]
+        },
+        {
+            "sku": "zen",
+            "children": [
+                {
+                    "size": "Twin",
+                    "price": 1299
+                },
+                {
+                    "size": "Queen",
+                    "price": 1599
+                },
+                {
+                    "size": "King",
+                    "price": 1799
+                }
+            ]
+        }
+    ]
+}

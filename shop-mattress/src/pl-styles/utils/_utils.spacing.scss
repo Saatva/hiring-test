@@ -1,0 +1,130 @@
+//-------------------------------------------
+// Spacing Styles
+// ------------------------------------------
+
+/// ## Spacing Utilities
+/// You can apply `margin` or `padding` to an element with generated utility classes. You have the flexibility to assign even spacing to all sides, vertical sides only, horizontal sides only, or target each side individually. The classes are built from a combination of scss maps that you can override or add to.
+///
+/// ### Notation
+/// The classes are named using this format `u-{propety}{side}--{size}`
+///
+/// It will create classes like:
+/// ```
+/// .u-margin--xs             => margin: 0.5rem;
+/// .u-marginLeft--6xl       => margin-left: 6rem;
+/// .u-marginBottom--md      => margin-right: 1.25rem
+/// .u-padding               => padding: 1rem;
+/// .u-paddingHorizontal    => padding-left: 1rem; padding-right: 1rem;
+/// .u-paddingVertical--2xl  => padding-top: 2.5rem; padding-botto: 2.5rem;
+///
+/// ```
+/// @example html
+/// <div class="u-padding">
+///     <h2>Orlando is a Winner</h2>
+///     <hr class="u-marginTop--xs u-marginBottom--lg">
+///     <p>He wins like the winningist winner there ever was. He also likes the color BLUE.</p>
+/// </div>
+/// @group utils-spacing
+
+
+$spacing-directions: (
+  null: null,
+  "Top": "-top",
+  "Right": "-right",
+  "Bottom": "-bottom",
+  "Left": "-left",
+  "Horizontal": "-left" "-right",
+  "Vertical": "-top" "-bottom"
+) !default;
+
+$spacing-props: (
+  "padding": "padding",
+  "margin": "margin"
+) !default;
+
+/// Variable map to define standard container widths. It is used by
+///
+/// Override or define additional widths with [`@update-container-widths`](#).
+///
+/// @group utils-spacing
+/// @example
+/// // You can add sizes to the $spacing-sizes map with:
+/// $spacing-sizes: (
+///     "-ittybitty": $spacer(4xs)
+/// );
+$spacing-sizes: (
+  null: spacer(base),
+  "--3xs": spacer(3xs),
+  "--2xs": spacer(2xs),
+  "--xs": spacer(xs),
+  "--sm": spacer(sm),
+  "--md": spacer(md),
+  "--lg": spacer(lg),
+  "--xl": spacer(xl),
+  "--2xl": spacer(2xl),
+  "--2dot5xl": spacer(2dot5xl),
+  "--3xl": spacer(3xl),
+  "--3dot75xl": spacer(3dot75xl),
+  "--4xl": spacer(4xl),
+  "--5xl": spacer(5xl),
+  "--6xl": spacer(6xl),
+  "--none": 0
+) !default;
+
+// TODO: if this is needed, verify multiplication factor
+$spacing-sizes-desktop: (
+  null: spacer(base) * 2,
+  "--xs": spacer(xs) * 2,
+  "--sm": spacer(sm) * 2,
+  "--base": spacer(base) * 2,
+  "--md": spacer(md) * 2,
+  "--lg": spacer(lg) * 2,
+  "--xl": spacer(xl) * 2,
+  "--2xl": spacer(2xl) * 2,
+  "--2dot5xl": spacer(2xl) * 2,
+  "--3xl": spacer(3xl) * 2,
+  "--3dot75xl": spacer(3xl) * 2,
+  "--4xl": spacer(4xl) * 2,
+  "--5xl": spacer(5xl) * 2,
+  "--6xl": spacer(6xl) * 2,
+  "--none": 0
+) !default;
+
+@each $prop-namespace, $prop in $spacing-props {
+
+    @each $direction-namespace, $direction in $spacing-directions {
+
+        @each $size-namespace, $size in $spacing-sizes {
+
+            // add @each for breakpoints if necessary...
+
+            .u-#{$prop-namespace}#{$direction-namespace}#{$size-namespace} {
+
+                @each $direction in $direction {
+                    #{$prop}#{$direction}: $size; // TODO: determine if we need to add !important... OR breakpoint for desktop size difference (should be a consistent factor change)
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+
+$layouts: (
+    ("Bottom", margin-bottom, spacer(2dot5xl), spacer(3dot75xl)),
+    ("Bottom--lg", margin-bottom, spacer(3dot75xl), spacer(5xl)),
+    ("Top", margin-top, spacer(2dot5xl), spacer(3dot75xl)),
+    ("Top--lg", margin-top, spacer(3dot75xl), spacer(5xl))
+);
+
+@each $layoutSet in $layouts {
+    .u-layoutSpacer#{nth($layoutSet,1)} {
+        #{nth($layoutSet,2)}: #{nth($layoutSet,3)};
+        @include breakpoint(md){
+            #{nth($layoutSet,2)}: #{nth($layoutSet,4)}; 
+        }
+    }
+}

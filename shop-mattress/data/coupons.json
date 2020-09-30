@@ -1,0 +1,39 @@
+{
+    "coupons": [
+        {
+            "id": 123,
+            "code": "SUMMER2020",
+            "discount": 200,
+            "threshold": 1000,
+            "message": "Save with our Summer Sale! Enjoy $200 off any purchase of $1,000 or more before midnight Monday 10/5"
+        },
+        {
+            "id": 124,
+            "code": "FALL2020",
+            "discount": 200,
+            "threshold": 1000,            
+            "message": "Fall back into our savings! Enjoy $200 off any purchase of $1,000 or more before midnight Monday 10/29"
+        },
+        {
+            "id": 125,
+            "code": "TURKEY2020",
+            "discount": 250,
+            "threshold": 1000,
+            "message": "Save with our Thanksgiving Day Sale! Enjoy $250 off any purchase of $1,000 or more before midnight Monday 11/13"
+        },
+        {
+            "id": 126,
+            "code": "jdurhdsnldi",
+            "discount": 200,
+            "threshold": 1000,
+            "message": "As a Tuck user, you can save $200 off any purchase of $1,000 or more before midnight Monday 10/25"
+        },
+        {
+            "id": 127,
+            "code": "hngkjdnfladi",
+            "discount": 200,
+            "threshold": 1000,
+            "message": "Save with our Thanksgiving Day Sale! Enjoy $250 off any purchase of $1,000 or more before midnight Monday 10/25"
+        }
+    ]
+}

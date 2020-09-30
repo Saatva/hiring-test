@@ -1,0 +1,397 @@
+//-------------------------------------------
+// Objects - Layout
+// ------------------------------------------
+
+$section-padding-m:      spacer(2dot5xl) 0 !default;
+$section-padding:        spacer(3dot75xl) 0 !default;
+$section-padding-xs-m:   spacer(base) 0 !default;
+$section-padding-xs:     spacer(base) 0 !default;
+$section-padding-sm-m:   spacer(xl) 0 !default;
+$section-padding-sm:     spacer(xl) 0 !default;
+$section-padding-md-m:   spacer(xl) 0 !default;
+$section-padding-md:     spacer(2xl) 0 !default;
+$section-padding-lg-m:   spacer(3dot75xl) 0 !default;
+$section-padding-lg:     spacer(5xl) 0 !default;
+
+$container-padding:         0 spacer(md)!default;
+$container-padding-tablet:  0;
+
+$footer-padding:                spacer(3xl) 0 !default;
+$footer-legal-padding:          spacer(xs) 0 0 0 !default;
+$footer-legal-border:           solid 1px #d2d2d2 !default; // TODO: add to color map
+$footer-legal-type-extend:      '.t-small' !default;
+
+
+/// ### Layout Elements
+///
+/// There are two design layout elements that can assist in controlling the vertical and horizontal sectioning of content on a page. You'll notice a common pattern is to have "sections" that break up content vertically as well as "containers" that keep content at a max-width, usually centered horizontally. These patterns are captured in the `.section` and `.container` layout classes. 
+/// @example html
+/// <section class="section u-scaffoldBg">
+///     <div class="container u-scaffoldOutline--alt3">Content in a container</div>
+/// </section>
+///
+/// @group objects-layout
+
+/// The `.section` class only controls spacing vetically with padding. 
+/// @group objects-layout
+
+.section {
+    padding: $section-padding-m;
+    height: auto;
+    overflow: hidden;
+
+    background-color: transparent;
+    text-align: center;
+
+    @include media-query-up(md) {
+        padding: $section-padding;
+    }
+}
+
+// TODO: audit if --xs, --sm, and --md are in use - refactor to proper breakpoint if necessary
+.section--xs {
+    padding: $section-padding-xs-m;
+
+    @include media-query-up(sm) {
+        padding: $section-padding-xs;
+    }
+}
+
+.section--sm {
+    padding: $section-padding-sm-m;
+
+    @include media-query-up(sm) {
+        padding: $section-padding-sm;
+    }
+}
+
+.section--md {
+    padding: $section-padding-md-m;
+
+    @include media-query-up(sm) {
+        padding: $section-padding-md;
+    }
+}
+
+.section--lg {
+    padding: $section-padding-lg-m;
+
+    @include media-query-up(md) {
+        padding: $section-padding-lg;
+    }
+}
+
+.section--top-trimmed {
+    padding-top: 0;
+}
+
+.section--bottom-trimmed {
+    padding-bottom: 0;
+}
+
+.section--trimmed {
+    padding: 0;
+}
+
+$section-bgColors-config: (
+    alt1: $scaffold
+) !default;
+
+@mixin createSectionBgColors($map) {
+    @each $val in $map {
+        $namespace: nth($val, 1);
+        
+        .section--#{$namespace} {
+            background-color: map-get($map, $namespace);
+        }
+    }
+}
+
+@include createSectionBgColors($section-bgColors-config);
+
+
+@mixin make-container() {
+    width: 100%; 
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+// ====== Apply max-width of container for each breakpoint ======
+// @param {map} $max-widths - map of max-widths for container
+// @param {map} $breakpoints - map of breakpoints
+ 
+@mixin make-container-widths($max-widths: $container-widths, $breakpoints: $breakpoints) {
+    @each $breakpoint,
+    $container-width in $max-widths {
+        @include media-query-up($breakpoint, $breakpoints) {
+            max-width: $container-width;
+        }
+    }
+}
+
+.container {
+    position: relative;
+    
+    @include make-container();
+    @include make-container-widths();
+
+    padding: $container-padding;
+
+    @include media-query-up(sm) {
+        padding: $container-padding-tablet;
+    }
+}
+
+@mixin container-grid-sizes( $namespace ) {    
+    @for $i from 1 through $grid-columns {
+        .containerCol--#{$namespace}-#{$i} {
+            flex-basis: calc-col-percent($i);
+            max-width: calc-col-percent($i);
+            margin: auto;
+        }
+    }
+}
+
+@each $val in $grid-breakpoints {
+    @if length($val)==1 {
+        $namespace: nth($val, 1);
+        @include container-grid-sizes( $namespace );
+    }
+    @else {
+        $namespace: nth($val, 1);
+        $size: nth($val, 2);
+        @media only screen and (min-width: #{$size}) {
+            @include container-grid-sizes( $namespace );
+        }
+    }
+}
+
+.container--full-height {
+    height: 100%;
+}
+
+// determine media query min-width as max-width + the basline gutter with below calc:
+.container--md {
+    @media (min-width: calc(750px + (#{$global-baseline} * 2px))) {
+        max-width: 750px;
+    }
+}
+
+.container--sm {
+    @media (min-width: calc(540px + (#{$global-baseline} * 2px))) {
+        max-width: 540px;
+    }
+}
+
+.container--xs {
+    @media (min-width: calc(480px + (#{$global-baseline} * 2px))) {
+        max-width: 480px;
+    }
+}
+
+.anchor {
+    display: block;
+    top: - spacer(3xl);
+    visibility: hidden;
+}
+
+
+$grid-columns: 12 !default;
+$grid-gutter: spacer(sm) !default;
+$grid-gutter-desktop: spacer(base) !default;
+$grid-gutter-vertical: spacer(2xl);
+// TODO: add variant gutters based on design container and spacing direction
+
+/** Grid breakpoints **/
+$grid-breakpoints: $breakpoints !default;
+
+/** calculate column percentages based on number of columns **/
+@function calc-col-percent($column-num) {
+    @return $column-num / $grid-columns * 100%;
+}
+
+
+/** calculate margin and padding using @spacing mixin and gutter definitiions 
+    ex: @include add-spacing( ( -$grid-gutter), margin, horizontal);
+*/
+
+
+/// ## Rows
+/// @group objects-grid
+
+
+/// @group objects-grid
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    @include add-spacing( ( -$grid-gutter), margin, horizontal);
+    width: calc(100% + (#{$grid-gutter} * 2));
+    @include breakpoint(lg){
+        @include add-spacing( ( -$grid-gutter-desktop), margin, horizontal);
+        width: calc(100% + (#{$grid-gutter-desktop} * 2));
+    }
+}
+
+/// ### Row Modifiers
+/// @group objects-grid
+
+/// @group objects-grid
+.row--reverse {
+    flex-direction: row-reverse;
+}
+
+/// @group objects-grid
+.row--gutter {
+
+    .col {
+        padding-bottom: $grid-gutter-vertical;
+
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+}
+
+/// ## Columns
+/// @group objects-grid
+
+/// @group objects-grid
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-height: 1px;
+    @include add-spacing( ( $grid-gutter), padding, horizontal);
+    @include breakpoint(lg){
+        @include add-spacing( ( $grid-gutter-desktop), padding, horizontal);
+    }
+}
+
+/// ### Column Modifiers
+/// @group objects-grid
+
+/// @group objects-grid
+.col--fill {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+}
+
+/// @group objects-grid
+.col--reverse {
+    flex-direction: column-reverse;
+}
+
+/// @group objects-grid
+.row--gutter {
+    .col:not(:last-of-type) {
+        padding-left: spacer(base);
+        padding-right: spacer(base);
+    }
+}
+
+
+/** generates column widths based on the number of columns (eg. col--md-6) **/
+@mixin grid-sizes( $namespace ) {    
+    @for $i from 1 through $grid-columns {
+        .col--#{$namespace}-#{$i} {
+            flex-basis: calc-col-percent($i);
+            max-width: calc-col-percent($i);
+        }
+    }
+    @for $i from 1 through $grid-columns {
+        // exclude .offset class in last column
+        @if ( $i !=$grid-columns) {
+            .col--offset-#{$namespace}-#{$i} {
+                margin-left: calc-col-percent($i);
+            }
+        }
+    }
+    .col--offset-#{$namespace}-reset {
+        margin-left: 0;
+    }
+}
+
+/** generates modifications to align and justify items (eg. row--start-md) **/
+@mixin grid-flex-mods( $namespace ) {
+    .row--start-#{$namespace} {
+        justify-content: start;
+        text-align: start;
+    }
+    .row--center-#{$namespace} {
+        justify-content: center;
+        text-align: center;
+    }
+    .row--end-#{$namespace} {
+        justify-content: flex-end;
+        text-align: end;
+    }
+    .row--top-#{$namespace} {
+        align-items: flex-start;
+    }
+    .row--middle-#{$namespace} {
+        align-items: center;
+    }
+    .row--bottom-#{$namespace} {
+        align-items: flex-end;
+    }
+    .row--around-#{$namespace} {
+        justify-content: space-around;
+    }
+    .row--between-#{$namespace} {
+        justify-content: space-between;
+    }
+
+    .row--direction-col-#{$namespace} {
+        flex-direction: column;
+    }
+
+    .row--direction-row-#{$namespace} {
+        flex-direction: row;
+    }
+
+    .col--order-first-#{$namespace} {
+        order: -1;
+    }
+    .col--order-last-#{$namespace} {
+        order: 1;
+    }
+    .col--order-reset-#{$namespace} {
+        order: 0;
+    }
+}
+
+
+/** for each breakpoint, create column widths and flex modifications **/
+@each $val in $grid-breakpoints {
+    @if length($val)==1 {
+        $namespace: nth($val, 1);
+        @include grid-sizes( $namespace );
+        @include grid-flex-mods( $namespace );
+    }
+    @else {
+        $namespace: nth($val, 1);
+        $size: nth($val, 2);
+        @media only screen and (min-width: #{$size}) {
+            @include grid-sizes( $namespace );
+            @include grid-flex-mods( $namespace );
+        }
+
+    @media only screen and (max-width: #{$size}) {
+        .row--gutter-#{$namespace} {
+            & > .col {
+                margin-bottom: $grid-gutter-vertical;
+                
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    }
+}

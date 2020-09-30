@@ -1,0 +1,125 @@
+//-------------------------------------------
+// Settings - Layout Variables
+// ------------------------------------------
+
+
+/// Sets the base 'spacer' to be leveraged in the grid system and layout utilities.
+/// @group settings-layout
+$spacer: 1rem !default;
+
+/// A semantic language for layout spacing based on a base `spacer`. Use it primarily to define `padding` and `margins`. 
+///
+/// An example of sizes based on a 16px grid would look like: 
+/// ```
+/// =================
+/// 3xs  ||  2px
+/// 2xs  ||  4px
+/// xs   ||  8px
+/// sm   ||  12px
+/// base ||  16px
+/// md   ||  20px
+/// lg   ||  24px
+/// xl   ||  28px
+/// 2xl  ||  32px
+/// 3xl  ||  48px
+/// 4xl  ||  64px
+/// 5xl  ||  80px
+/// 6xl  ||  96px
+/// 10xl ||  160px
+/// =================
+/// ```
+/// 
+/// All layout designs should follow this system. For example, you should never need to explicity state `13px` in a 16px grid system; instead check with the Design team and see if `12px` is alright. If so, use the `spacer` mixin to grab the `sm` spacer size. 
+/// 
+/// @example
+///   .element {
+///      margin-bottom: spacer(2xl);
+///   }
+/// @group settings-layout
+$spacers: (
+    0: 0,
+    3xs: ($spacer * .125),
+    2xs: ($spacer * .25),
+    xs: ($spacer * .5),
+    sm: ($spacer * .75),
+    base: ($spacer * 1),
+    md: ($spacer * 1.25),
+    lg: ($spacer * 1.5),
+    xl: ($spacer * 1.75),
+    2xl: ($spacer * 2),
+    2dot5xl: ($spacer * 2.5),
+    3xl: ($spacer * 3),
+    3dot75xl: ($spacer * 3.75),
+    4xl: ($spacer * 4),
+    5xl: ($spacer * 5),
+    6xl: ($spacer * 6),
+    7xl: ($spacer * 7),
+    8xl: ($spacer * 8),
+    9xl: ($spacer * 9),
+    10xl: ($spacer * 10)
+) !default;
+
+/// Variable map to define device breakpoints.
+/// Override or define additional breakpoints with [`@update-breakpoints`](#).
+/// 
+/// @group settings-layout
+///
+/// @example
+/// .element {
+///     max-width: map-get($breakpoints, md);
+/// }
+///
+/// @see %settings-globals
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 1025px,
+    xl: 1200px,
+    2xl: 1440px
+) !default;
+
+// TODO: add all update maps if we want to provide that
+
+/// Variable map to define standard container widths. It is used by 
+/// 
+/// Override or define additional widths with [`@update-container-widths`](#).
+/// 
+/// @group settings-layout
+///
+/// @example
+/// .element {
+///     max-width: map-get($container-widths, md);
+/// }
+$container-widths: (
+  sm: 540px,
+  md: 680px,
+  lg: 932px,
+  xl: 1110px
+) !default;
+
+
+/// Variable map to define z-index.
+/// 
+/// Override or define additional index levels with [`@update-z-layers`](#).
+///
+/// @group settings-layout
+///
+/// @example
+/// .element {
+///     z-index: map-get($z-layers, sticky);
+/// }
+/// @example
+/// // Instead of using `map-get`, we provide
+/// // the z() function to return the z-index value:
+/// .element {
+///     z-index: z(sticky);
+/// }
+$z-layers: (
+  underworld: -9999,
+  default: 1,
+  dropdown: 100,
+  sticky: 3000,
+  overlay: 4000,
+  modal: 4001
+) !default;

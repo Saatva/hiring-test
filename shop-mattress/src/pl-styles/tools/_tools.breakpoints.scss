@@ -1,0 +1,151 @@
+//-------------------------------------------
+// Tools - Breakpoints
+// ------------------------------------------
+
+@function breakpoint-next($name, $breakpoints: $breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+    $n: index($breakpoint-names, $name);
+    @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+} 
+
+
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min !=0, $min, null);
+} 
+
+@function breakpoint-max($name, $breakpoints: $breakpoints) {
+    $next: breakpoint-next($name, $breakpoints);
+    @return if($next, breakpoint-min($next, $breakpoints) - 1, null);
+} 
+
+@mixin media-query-up($name, $breakpoints: $breakpoints) {
+    $min: $name;
+    
+    @if (map-has-key($breakpoints, $name)) {
+        $min: breakpoint-min($name, $breakpoints);
+    } 
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+} 
+
+@mixin media-query-down($name, $breakpoints: $breakpoints) {
+    $max: $name;
+    
+    @if (map-has-key($breakpoints, $name)) {
+        $max: breakpoint-max($name, $breakpoints);
+    } 
+
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+} 
+
+/// Defines a `min-width` or `max-width` media query
+/// 
+/// @group tools-breakpoints
+/// @param {string} $name [-]
+///   Specifies the breakpoint based on the breakpoint variables or a custom value. Ex( 'lg' or '325px'
+///
+/// @param {string} $direction [min]
+///   _(optional)_ Specifies the direction of the media query, either min or max
+///
+/// @example
+/// .element {
+///     @include breakpoint(md) {
+///         text-decoration: underline;
+///     }
+///     @include breakpoint(325px, max) {
+///         color: color(accent);
+///     }
+/// }
+@mixin breakpoint($name, $direction: min) {
+    
+    @if ($direction == min) {
+        @include media-query-up($name) {
+            @content;
+        }
+    } @else if ($direction == max) {
+        @include media-query-down($name) {
+            @content;
+        }
+    }
+} 
+
+/// Defines a range between a lower and upper boundary for media queries
+/// 
+/// @group tools-breakpoints
+/// @param {string} $lower [-]
+///   Specifies minimum boundary for the breakpoint set, based on the breakpoint variables or a custom value. Ex( 'lg' or '325px'
+///
+/// @param {string} $upper [min]
+///   Specifies maximum boundary for the breakpoint set, based on the breakpoint variables or a custom value. Ex( 'lg' or '325px'
+///
+/// @example
+/// .element {
+///     @include between-breakpoint(md, lg) {
+///         text-decoration: underline;
+///     }
+/// }
+@mixin between-breakpoint($lower, $upper, $breakpoints: $breakpoints) {
+    $min: breakpoint-min($lower, $breakpoints);
+    $max: breakpoint-max($upper, $breakpoints);
+    @if $min !=null and $max !=null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+    @else if $max==null {
+        @include media-query-up($lower, $breakpoints) {
+            @content;
+        }
+    }
+    @else if $min==null {
+        @include media-query-down($upper, $breakpoints) {
+            @content;
+        }
+    }
+} 
+
+/// Defines styles within a single breakpoint range (e.g. only within the 'lg' breakpoint widths)
+/// 
+/// @group tools-breakpoints
+/// @param {string} $name [-]
+///   Specifies the breakpoint based on the breakpoint variables or a custom value. Ex( 'lg' or '325px'
+///
+/// @example
+/// .element {
+///     @include only-breakpoint(md) {
+///         text-decoration: underline;
+///     }
+/// }
+@mixin only-breakpoint($name, $breakpoints: $breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    $max: breakpoint-max($name, $breakpoints);
+    @if $min !=null and $max !=null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+    @else if $max==null {
+        @include media-query-up($name, $breakpoints) {
+            @content;
+        }
+    }
+    @else if $min==null {
+        @include media-query-down($name, $breakpoints) {
+            @content;
+        }
+    }
+}

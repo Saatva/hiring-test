@@ -1,0 +1,20 @@
+//-------------------------------------------
+// Objects - Typography
+// ------------------------------------------
+
+// is there a need for default typo styles?
+
+$typographyTheme-default: (
+    'body': (
+        'size':                 16,
+        'lineHeight':           1.75,
+        'weight':               $fontWeight-light,
+        'transform':            none,
+    )
+ ) !default;
+
+$typographyTheme-custom: () !default;
+
+$typographyTheme-config: map-merge($typographyTheme-default, $typographyTheme-custom);
+
+@include makeTypoClasses($typographyTheme-config);

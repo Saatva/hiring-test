@@ -1,0 +1,26 @@
+//-------------------------------------------
+// Base - HTML Primitives
+// ------------------------------------------
+
+@-ms-viewport {
+    width: auto!important;
+}
+
+html {
+    font-size: $fontSize-base;
+}
+
+// set body, paragraph, and link styles unless user declares $default-setup 'false'
+@if $use-default-setup {
+    body {
+        @include style-base-body();
+    }
+
+    p {
+        @include style-base-paragraph();
+    }   
+
+    a {
+        @include style-base-link();
+    }
+}
