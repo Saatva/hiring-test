@@ -5,5 +5,5 @@ Expand on the take home exercise to fetch external data. Time permitting, comple
 
 #### Requirements
 1. Improve the implementation of an existing feature of your app.
-2. Using the response from the provided internal endpoint, `/ap/mattress-data`, create the same data structure used in `mattresses.json` to power your application. You can fetch the data within a `useEffect` and combine it in that method. 
+2. Using the response from the provided internal endpoint, `/api/mattress-data`, create the same data structure used in `mattresses.json` to power your application. You can fetch the data within a `useEffect` and combine it in that method. 
 3. Make an improvement to the cart feature.
