@@ -1,7 +1,7 @@
 ## Mattress Shop Page: A Pairing
 
 ### Objective
-Expand on the take home exercise to fetch external data. Time permitting, complete requirements 2-3 in order.
+Improve and expand on the take home exercise. Time permitting, complete requirements 2-3 in order.
 
 #### Requirements
 1. Improve the implementation of an existing feature of your app.
