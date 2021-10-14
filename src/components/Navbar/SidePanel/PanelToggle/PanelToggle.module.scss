@@ -1,0 +1,58 @@
+.PanelToggle {
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: .5rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none;
+	padding: 0;
+	transition: background-color .3s ease-out;
+	height: 40px;
+	width: 40px;
+	div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 30px;
+		width: 30px;
+	}
+	.Line {
+		background-color: hsl(35, 100%, 15%);
+		border-radius: 2px;
+		transition: transform .3s ease-out, opacity .3s ease-out;
+		transform-origin: center;
+		height: 3px;
+		width: 30px;
+		&:nth-child(1) {
+			transform: translateY(-5px);
+		}
+		&:nth-child(3) {
+			transform: translateY(5px);
+		}
+	}
+}
+.PanelToggle.Open {
+	background-color: hsl(35, 100%, 45%);
+}
+.Open {
+	.Line {
+		&:nth-child(1) {
+			transform: translateY(3px) rotate(45deg);
+		}
+		&:nth-child(2) {
+			opacity: 0;
+		}
+		&:nth-child(3) {
+			transform: translateY(-3px) rotate(-45deg);
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.PanelToggle {
+		display: none;
+	}
+}

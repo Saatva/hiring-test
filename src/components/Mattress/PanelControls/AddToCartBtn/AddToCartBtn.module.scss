@@ -1,0 +1,39 @@
+.AddToCartBtn {
+    background-color: #d5aa63;
+    border: 1px solid hsl(35, 100%, 50%);
+    border-radius: 0;
+    border: 1px solid #4d4d4d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+    font-family: 'Questrial', sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    margin: 2rem 0;
+    outline: none;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #4d4d4d;
+    border-color: #d5aa63;
+    transition: background-color .25s ease;
+}
+
+.AddToCartBtn:hover,
+.AddToCartBtn:focus {
+  background-color: hsl(35, 100%, 45%);
+}
+
+.AddToCartBtn:not(:disabled) {
+  animation: animateAddToCartButton 0.3s linear;
+}
+
+@keyframes animateAddToCartButton {
+  0% {
+      transform: scale(1);
+  }
+  60% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}

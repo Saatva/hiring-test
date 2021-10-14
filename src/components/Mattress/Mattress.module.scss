@@ -1,0 +1,35 @@
+.Container {
+  width: 100%;
+  background-color: hsl(0, 0%, 95%);
+}
+
+.Mattress {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.PanelControls {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.Photo {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+@media (max-width: 800px) {
+  .Mattress {
+    flex-direction: column;
+  }
+}

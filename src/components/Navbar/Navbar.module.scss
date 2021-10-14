@@ -1,0 +1,28 @@
+
+.Navbar {
+	background-color: #fff;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .35);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	padding: 0 1rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 99;
+	nav {
+		height: 100%;
+	}
+}
+
+.Cart {
+	height: 60px;
+}
+
+@media (max-width: 767px) {
+	.DesktopOnly {
+		display: none;
+	}
+}

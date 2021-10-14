@@ -1,0 +1,35 @@
+.SidePanel {
+    background-color: white;
+    height: 100%;
+    max-width: 70%;
+    padding: 2rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s ease-out;
+    width: 280px;
+    z-index: 950;
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .SidePanel {
+        display: none;
+    }
+}
+

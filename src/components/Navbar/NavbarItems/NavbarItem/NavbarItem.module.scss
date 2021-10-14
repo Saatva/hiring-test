@@ -1,0 +1,57 @@
+.NavbarItem {
+	display: block;
+	line-height: 1;
+	margin: 1rem 0;
+	width: 100%;
+	a {
+		color: inherit;
+		cursor: pointer;
+		display: block;
+		line-height: 1;
+		text-decoration: none;
+		width: 100%;
+		&:hover {
+			color: hsl(33, 17%, 90%);
+		}
+		&:active {
+			color: hsl(33, 17%, 90%);
+		}
+	}
+	a.active {
+		font-weight: 700;
+	}
+}
+
+@media (min-width: 768px) {
+	.NavbarItem {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		margin: 0;
+		width: auto;
+		a {
+			border-bottom: 4px solid transparent;
+			color: inherit;
+			display: flex;
+			align-items: center;
+			height: 100%;
+			padding: .5rem 1.5rem;
+			width: auto;
+			&:hover {
+				background-color: hsl(33, 17%, 90%);
+				border-bottom-color: hsl(35, 100%, 25%);
+				color: inherit;
+			}
+			&:active {
+				background-color: hsl(33, 17%, 90%);
+				border-bottom-color: hsl(35, 100%, 25%);
+				color: inherit;
+			}
+		}
+		a.active {
+			background-color: hsl(33, 17%, 90%);
+			border-bottom-color: hsl(35, 100%, 25%);
+			color: inherit;
+		}
+	}
+}

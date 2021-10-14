@@ -1,0 +1,20 @@
+.Photo {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: right;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+    width: 100%;
+}
+
+.Photo img {
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .Photo {
+        height: auto;
+        min-width: 500px;
+    }
+}

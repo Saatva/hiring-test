@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PanelControls /> should match the snapshot 1`] = `"<div class=\\"PanelControls\\"><h1>Choose Your Mattress</h1><label>SELECT MATTRESS TYPE</label><div class=\\"ButtonGroup\\"><button name=\\"Classic\\">Classic</button></div><div><p>Classic Mattress</p><p>$120</p></div><div><div class=\\"ReviewRating\\"><span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></div></div><button class=\\"AddToCartBtn\\">Add to Cart</button></div>"`;
+
+exports[`Link changes the class when hovered 1`] = `
+<div
+  className="PanelControls"
+>
+  <h1>
+    Choose Your Mattress
+  </h1>
+  <label>
+    SELECT MATTRESS TYPE
+  </label>
+  <div
+    className="ButtonGroup"
+  >
+    <button
+      name="test"
+      onClick={[Function]}
+    >
+      test
+    </button>
+  </div>
+  <div>
+    <p>
+      test
+       Mattress
+    </p>
+    <p>
+      $
+    </p>
+  </div>
+  <div>
+    <div
+      className="ReviewRating"
+    >
+      <span>
+        ★
+      </span>
+      <span>
+        ☆
+      </span>
+      <span>
+        ☆
+      </span>
+      <span>
+        ☆
+      </span>
+      <span>
+        ☆
+      </span>
+      <span>
+        ☆
+      </span>
+    </div>
+  </div>
+  <button
+    className="AddToCartBtn"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Add to Cart
+  </button>
+</div>
+`;

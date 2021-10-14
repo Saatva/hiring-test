@@ -1,0 +1,19 @@
+.Cart {
+	height: 100%;
+	img {
+		height: 100%;
+		width: auto;
+		transform: scale(0.7);
+	}
+	span {
+		padding-left: 5px;
+		padding-right: 5px;
+		border-radius: 50%;
+		position: absolute;
+		top: 7px;
+		right: 35px;
+		background: #c19678;
+		color: #fff;
+		font-size: 15px;
+	}
+}

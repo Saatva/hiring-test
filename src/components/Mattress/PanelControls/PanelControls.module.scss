@@ -1,0 +1,27 @@
+.PanelControls {
+    background-color: hsl(0, 0%, 95%);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    width: 100%;
+}
+
+.PanelControls h1 {
+  font-family: 'Source Serif Pro', serif;
+}
+
+.PanelControls p, label {
+  font-family: 'Questrial', sans-serif;
+}
+
+.PanelControls label {
+  padding-bottom: 4px;
+}
+
+.PanelControls div {
+  display: flex;
+  justify-content: space-between;
+}
