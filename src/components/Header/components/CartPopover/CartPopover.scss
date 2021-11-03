@@ -1,0 +1,45 @@
+.cart-popover {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  background: white;
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  min-width: 10rem;
+
+  .inner {
+    position: relative;
+
+    .close {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .cart-item-list {
+      padding: 0;
+      margin: 0;
+
+      .cart-item {
+        list-style: none;
+        text-align: left;
+        margin-bottom: 1rem;
+
+        form {
+          margin-top: 0.25rem;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

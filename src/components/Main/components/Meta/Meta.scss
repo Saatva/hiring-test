@@ -1,0 +1,91 @@
+@import '../../../../_colors.scss';
+
+.meta {
+  text-align: left;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 2rem;
+  }
+
+  .select-type {
+    margin-top: 2rem;
+
+    strong.label {
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .type-selector {
+      display: flex;
+
+      .type-option {
+        flex: 1 0 auto;
+        padding: 0.5rem 0;
+        text-align: center;
+        border: 1px solid gray;
+        border-right: none;
+        background: white;
+        font-size: 0.625rem;
+        transition: opacity 0.2 ease;
+
+        @media screen and (min-width: 768px) {
+          font-size: 0.875rem;
+        }
+
+        &:last-child {
+          border-right: 1px solid gray;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          &:not(.active) {
+            opacity: 0.6;
+          }
+        }
+
+        &.active {
+          color: white;
+          background: $highlight;
+        }
+      }
+    }
+  }
+
+  .name-rating-price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+    .name {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .rating {
+      font-size: 0.75rem;
+    }
+  }
+
+  button.add {
+    width: 100%;
+    background: $button;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    transition: opacity 0.2 ease;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+}

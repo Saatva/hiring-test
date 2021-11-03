@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser'
 const express = require('express')
-const axios = require('axios')
 
 const app = express()
 const port = 5000
@@ -9,47 +8,37 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/api/mattress-data', (req, res) => {
-  res.send([
-      {
+    // mattress data endpoint: https://w5uw2yuhpg.execute-api.us-east-1.amazonaws.com/api/products?set=mattresses
+    // content data endpoint: https://w5uw2yuhpg.execute-api.us-east-1.amazonaws.com/api/products?set=mattresses
+
+    res.send({})
+
+    /* Final object should look like this:
+
+    {
         "mattresses": {
             "classic": {
-                "name": "Saatva Classic",
+                "name": "<span>Saatva Classic Mattress</span>",
                 "price": 999,
-                "reviewRating": 4.9
+                "reviewRating": 4.9,
+                "imageFileName": "classic-carousel.jpg"
             },
             "loom": {
-                "name": "Loom & Leaf",
+                "name": "<span>Loom & Leaf Mattress</span>",
                 "price": 1299,
-                "reviewRating": 4.0
+                "reviewRating": 4.0,
+                "imageFileName": "loom-carousel.jpg"
             },
             "zen": {
-                "name": "Zenhaven",
+                "name": "<span>Zenhaven Mattress</span>",
                 "price": 1599,
-                "reviewRating": 4.5
+                "reviewRating": 4.5,
+                "imageFileName": "zen-carousel.jpg"
             }
         }
-    },
-    [
-        {
-            "productKey": "classic",
-            "label": "<span>Saatva Classic Mattress</span>",
-            "thumbnail": "https://store.saatva.com/media/catalog/product/t/h/thumb_sm_reg_2x_1_40.jpg",
-            "imageFileName": "classic-carousel.jpg"
-        },
-        {
-            "productKey": "loom",
-            "label": "<span>Loom & Leaf Mattress</span>",
-            "thumbnail": "https://store.saatva.com/media/catalog/product/t/h/thumb_ll_reg_2x_12.jpg",
-            "imageFileName": "loom-carousel.jpg"
-        },
-        {
-            "productKey": "zen",
-            "label": "<span>Zenhaven Mattress</span>",
-            "imageFileName": "zen-carousel.jpg",
-            "thumbnail": "https://store.saatva.com/media/catalog/product/t/h/thumb_zen_reg_2x_4.jpg"
-        }
-    ]
-  ])
+    }
+
+    */
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

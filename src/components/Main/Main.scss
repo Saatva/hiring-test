@@ -1,0 +1,20 @@
+main#main {
+  padding: 1rem;
+
+  .carousel-container {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 1rem 4rem;
+    display: flex;
+
+    .carousel-container {
+      width: 50%;
+    }
+
+    .meta-container {
+      flex: 1 1 auto;
+    }
+  }
+}

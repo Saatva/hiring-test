@@ -1,0 +1,38 @@
+@import '../../../../_colors.scss';
+
+.cart {
+  position: relative;
+
+  button.cart-button {
+    background: none;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .count-badge {
+    position: absolute;
+    top: -6px;
+    right: -12px;
+
+    .count-container {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      background: $brand;
+      border-radius: 100%;
+
+      .count {
+        display: block;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}

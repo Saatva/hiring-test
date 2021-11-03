@@ -1,0 +1,16 @@
+.image-carousel {
+  overflow: hidden;
+
+  ul.carousel-container {
+    padding: 0;
+    display: flex;
+    transition: transform 0.2s ease;
+
+    li {
+      list-style: none;
+      background-position: top left;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+    }
+  }
+}
