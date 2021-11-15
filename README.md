@@ -64,19 +64,19 @@ Expand on the take home exercise to fetch external data. Time permitting, comple
 {
     "mattresses": {
         "classic": {
-            "name": "<span>Saatva Classic</span>",
+            "name": "<span>Saatva Classic Mattress</span>",
             "price": 999,
             "reviewRating": 4.9,
             "imageFileName": "classic-carousel.jpg"
         },
         "loom": {
-            "name": "<span>Loom & Leaf</span>",
+            "name": "<span>Loom & Leaf Mattress</span>",
             "price": 1299,
             "reviewRating": 4.0,
             "imageFileName": "loom-carousel.jpg"
         },
         "zen": {
-            "name": "<span>Zenhaven</span>",
+            "name": "<span>Zenhaven Mattress</span>",
             "price": 1599,
             "reviewRating": 4.5,
             "imageFileName": "zen-carousel.jpg"
