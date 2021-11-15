@@ -34,7 +34,7 @@ Expand on the take home exercise to fetch external data. Time permitting, comple
 }
 ```
 
-##### content response:git
+##### content response:
 ```
 [
     {
@@ -57,3 +57,30 @@ Expand on the take home exercise to fetch external data. Time permitting, comple
     }
 ]
 ```
+
+##### final object example:
+
+```
+{
+    "mattresses": {
+        "classic": {
+            "name": "<span>Saatva Classic</span>",
+            "price": 999,
+            "reviewRating": 4.9,
+            "imageFileName": "classic-carousel.jpg"
+        },
+        "loom": {
+            "name": "<span>Loom & Leaf</span>",
+            "price": 1299,
+            "reviewRating": 4.0,
+            "imageFileName": "loom-carousel.jpg"
+        },
+        "zen": {
+            "name": "<span>Zenhaven</span>",
+            "price": 1599,
+            "reviewRating": 4.5,
+            "imageFileName": "zen-carousel.jpg"
+        }
+    }
+}
+  ```
