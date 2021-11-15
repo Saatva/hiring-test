@@ -1,4 +1,4 @@
-const bodyParser = require('body-parser')
+import bodyParser from 'body-parser'
 const express = require('express')
 const axios = require('axios')
 
