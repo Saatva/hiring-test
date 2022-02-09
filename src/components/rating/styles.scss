@@ -1,0 +1,10 @@
+@import "assets/styles/colors";
+
+.ms-rating {
+    display: flex;
+    margin-top: 16px;
+}
+
+.ms-rating__fill {
+    fill: $yellow;
+}

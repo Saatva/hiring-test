@@ -1,0 +1,120 @@
+@import "assets/styles/colors";
+@import "assets/styles/mixins";
+
+.ms-shopping-cart-dropdown {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+
+    visibility: hidden;
+    pointer-events: none;
+    border: 1px solid $light-gray;
+    padding: 14px;
+    background-color: $white;
+    box-shadow: 0px 0px 8px 0px transparentize($color: $dark, $amount: 0.8);
+
+    z-index: 1;
+}
+
+.ms-shopping-cart-dropdown--active {
+    visibility: visible;
+    pointer-events: initial;
+}
+
+.ms-shopping-cart-dropdown__item {
+    display: flex;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid $light-gray;
+    }
+}
+
+.ms-shopping-cart-dropdown__item__image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.ms-shopping-cart-dropdown__item__description {
+    flex-grow: 1;
+    padding: 0 8px;
+    text-align: left;
+}
+
+.ms-shopping-cart-dropdown__item__title {
+    font-size: 16px;
+    color: $dark-gray;
+}
+
+.ms-shopping-cart-dropdown__item__price {
+    font-size: 18px;
+    margin-top: 10px;
+    color: $dark-gray;
+}
+
+.ms-shopping-cart-dropdown__item__controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ms-shopping-cart-dropdown__item__delete-button {
+    @include reset-button;
+
+    svg {
+        fill: $dark-gray;
+    }
+}
+
+.ms-shopping-cart-dropdown__item__quantity-control {
+    display: flex;
+    flex-wrap: nowrap;
+
+    button {
+        @include reset-button;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+
+        border-radius: 100%;
+        background-color: $gray;
+        color: $white;
+        font-weight: bold;
+
+        &:disabled {
+            background-color: $light-gray;
+        }
+    }
+}
+
+.ms-shopping-cart-dropdown__item__quantity-label {
+    margin: 0 8px;
+    font-weight: bold;
+    color: $dark-gray;
+}
+
+.ms-shopping-cart-dropdown__empty {
+    text-align: center;
+    color: $dark-gray;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translatey(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translatey(0);
+    }
+}

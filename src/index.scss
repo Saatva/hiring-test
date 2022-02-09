@@ -1,0 +1,17 @@
+@import "assets/styles/fonts";
+
+body * {
+    margin: 0;
+    font-family: "Questrial", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Source Serif Pro", serif;
+}
+
+.ms-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}

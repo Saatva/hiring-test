@@ -1,0 +1,18 @@
+@mixin reset-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+@mixin phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
+@mixin desktop-sm {
+    @media (max-width: 1080px) {
+        @content;
+    }
+}
