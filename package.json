@@ -1,6 +1,6 @@
 {
   "name": "saatva-test",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
